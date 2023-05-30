@@ -1,0 +1,197 @@
+﻿@model Valcan.Models.CreateUserViewModel
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/css/intlTelInput.css">*@
+<link href="~/Scripts/CountryCodeJS/css/intlTelInput.css" rel="stylesheet" />
+
+<style>
+    .hide {
+        display: none;
+    }
+
+    .error {
+        display: block;
+    }
+
+    .iti {
+        width: 100% !important;
+    }
+</style>
+@using (Html.BeginForm("Edit", "UserMasters", new { }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Password)
+        @Html.Label("First Name")
+        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Your First Name" } })
+        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+    </div>
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.LastName)
+
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Your Contact number" } })
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName)<br />
+
+        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", id = "txtPhone", placeholder = "Enter Your Contact number" } })<br />
+        <br />
+        <span id="valid-msg" class="hide text-success">✓ Valid</span>
+        <span id="error-msg" class="hide text-danger"></span>
+        <br />
+
+
+    </div>
+    @Html.HiddenFor(model => model.countryflag)
+    <div class="form-group">
+        @Html.Label("Username")
+
+        @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Your Email ID" } })
+        @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group mb-1">
+        <p class="m-2">Key Manager</p>
+    </div>
+
+    foreach (var choice in Model.KMChoicesVM)
+    {
+        <div class="form-group form-check">
+            <input id="choice@(choice.SNo)"
+                   type="checkbox"
+                   class="form-check-input"
+                   name="SelectedChoices"
+                   value="@choice.SNo"
+                   @(Model.SelectedChoices.Contains(choice.SNo) ? "checked" : "") />
+            <label class="form-check-label" for="operator@(choice.SNo)">@choice.Text</label>
+        </div>
+
+    }
+    <div class="form-group mb-1">
+        <p class="m-2">Roles</p>
+    </div>
+
+    foreach (var choice in Model.ChoicesVM)
+    {
+        <div class="form-group form-check">
+            <input id="Rolechoice@(choice.SNo)"
+                   type="radio"
+                   class="form-check-input"
+                   name="SelectedRoleChoices"
+                   value="@choice.SNo"
+                   @(Model.SelectedRoleChoices.Contains(choice.SNo) ? "checked" : "") />
+            <label class="form-check-label" for="operator@(choice.SNo)">@choice.Text</label>
+        </div>
+
+    }
+    <br />
+    <span id="errormsg" class="hide text-danger"></span>
+
+    <button type="submit" class="btn btn-primary submit-btn">Update</button>
+
+}
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+
+@Scripts.Render("~/bundles/jqueryval")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/intlTelInput-jquery.min.js"></script>
+<script src="~/Scripts/CountryCodeJS/js/intlTelInput.min.js"></script>
+<script src="~/Scripts/CountryCodeJS/js/intlTelInput-jquery.min.js"></script>
+
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            var code = @Model.LastName; // Assigning value from model.
+
+            $('#txtPhone').intlTelInput({
+                autoHideDialCode: true,
+                autoPlaceholder: "ON",
+               /* dropdownContainer: document.body,*/
+                formatOnDisplay: true,
+                hiddenInput: "full_number",
+                initialCountry: "auto",
+                nationalMode: true,
+                placeholderNumberType: "MOBILE",
+                preferredCountries: ['US'],
+                separateDialCode: true
+            });
+
+           /* $('#txtPhone').val(code);*/
+        });
+
+        $('.submit-btn').on('click', function () {
+            $('#countryflag').val($("#txtPhone").intlTelInput("getSelectedCountryData").dialCode);
+
+        });
+    </script>*@
+
+<script>
+    var input = document.querySelector("#txtPhone"),
+        errorMsg = document.querySelector("#error-msg"),
+        validMsg = document.querySelector("#valid-msg");
+    var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+    var iti = window.intlTelInput(input, {
+
+        utilsScript: "../../Scripts/CountryCodeJS/js/utils.js",
+        separateDialCode: true
+    });
+
+    var reset = function () {
+        input.classList.remove("error");
+        errorMsg.innerHTML = "";
+        errorMsg.classList.add("hide");
+        validMsg.classList.add("hide");
+    };
+
+    // on blur: validate
+    input.addEventListener('blur', function () {
+        reset();
+        if (input.value.trim()) {
+            if (iti.isValidNumber()) {
+                validMsg.classList.remove("hide");
+            } else {
+                input.classList.add("error");
+                var errorCode = iti.getValidationError();
+                if (errorMap[errorCode] != undefined && errorMap[errorCode] != null)
+                    errorMsg.innerHTML = errorMap[errorCode];
+                else
+                    errorMsg.innerHTML = "Invalid number";
+                errorMsg.classList.remove("hide");
+            }
+        }
+    });
+
+    // on keyup / change flag: reset
+    input.addEventListener('change', reset);
+    input.addEventListener('keyup', reset);
+
+    $('.submit-btn').on('click', function () {
+
+        if (iti.isValidNumber()) {
+            $('#countryflag').val(iti.getSelectedCountryData().dialCode);
+        }
+        else {
+            document.getElementById("txtPhone").focus();
+            return false;
+        }
+
+        var msg = document.getElementById('errormsg');
+        msg.innerHTML = "";
+        msg.classList.add("hide");
+        var len = document.querySelectorAll('input[type="checkbox"]:checked').length
+        if (len <= 0) {
+            msg.innerHTML = "Please check at least one key Manager.";
+            msg.classList.remove("hide");
+            return false;
+        }
+        var rlen = document.querySelectorAll('input[type="radio"]:checked').length
+        if (rlen <= 0) {
+            msg.innerHTML = "Please check at least one role.";
+            msg.classList.remove("hide");
+            return false;
+        }
+    });
+
+</script>
+
+
+
+

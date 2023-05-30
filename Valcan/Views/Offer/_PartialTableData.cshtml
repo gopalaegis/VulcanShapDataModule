@@ -1,0 +1,224 @@
+﻿@model IEnumerable<Valcan.Models.OfferViewModel>
+
+<div>
+    <b>Orders Expected (INR): </b> <label id="lbltotal2" style="color:red;"></label>
+    <br />
+    <b>Offers value (INR):</b> <label id="lbltotal" style="color:red;"></label>
+
+</div>
+<br />
+<br />
+<table id="dataTable" class="display responsive nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Key_Managr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sold_to_pt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name_1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Document)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doc_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Purchase_order_number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Material)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Material_Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConfirmQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Net_price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Net_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Curr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Exch_Rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Offer_Value_INR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order_Expected)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Key_Managr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sold_to_pt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name_1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Document)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.strDoc_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchase_order_number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material_Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConfirmQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Net_price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Net_Value)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Curr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Exch_Rate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Offer_Value_INR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order_Expected)
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+
+
+    if (!$.fn.DataTable.isDataTable('#dataTable')) {
+        $('#dataTable').dataTable({
+            bSort: false,
+            dom: 'Bfplrti', //Blfrtip
+            sScrollX: true,
+            sScrollY: true,
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All'],
+            ],
+            buttons: [{
+                extend: 'excelHtml5',
+                text: 'Export to Excel',
+                autoFilter: true,
+                sheetName: 'Exported data'
+            }],
+            columnDefs: [
+                {
+                    targets: [10],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                },
+                {
+                    targets: [11],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                },
+                {
+                    targets: [14],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                },
+                {
+                    targets: [15],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                }
+            ],
+            footerCallback: function (row, data, start, end, display) {
+                debugger;
+                var api = this.api();
+
+                // Remove the formatting to get integer data for summation
+                //var intVal = function (i) {
+                //    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                //};
+
+                // Total over all pages
+                //total = api
+                //    .column(14)
+                //    .data()
+                //    .reduce(function (a, b) {
+                //        return parseFloat(a) + parseFloat(b);
+                //    }, 0);
+
+                // Total over this page
+                pageTotal = api
+                    .column(14, { search: 'applied' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return parseFloat(a) + parseFloat(b);
+                    }, 0);
+
+                // Total over all pages
+                //total2 = api
+                //    .column(15)
+                //    .data()
+                //    .reduce(function (a, b) {
+                //        return parseFloat(a) + parseFloat(b);
+                //    }, 0);
+
+                // Total over this page
+                pageTotal2 = api
+                    .column(15, { search: 'applied' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return parseFloat(a) + parseFloat(b);
+                    }, 0);
+
+                // Update footer
+                var offerValTotal = addCommas(parseInt(pageTotal))
+                var orderExpectedTot = addCommas(parseInt(pageTotal2))
+                $("#lbltotal").html(offerValTotal);
+                $("#lbltotal2").html(orderExpectedTot);
+                //$(api.column(1).footer()).html('$' + pageTotal + ' ( $' + total + ' total)');
+                //$(api.column(2).footer()).html('$' + pageTotal2 + ' ( $' + total2 + ' total)');
+            }
+        });
+    }
+    $('body').find('.dataTables_scroll').wrap('<div id="scroll_div"></div>');
+    $('#scroll_div').doubleScroll();
+</script>
+
+

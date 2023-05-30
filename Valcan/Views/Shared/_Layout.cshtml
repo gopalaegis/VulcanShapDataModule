@@ -1,0 +1,1218 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Template/favicon.ico" />
+
+    <!-- Custom css for this template-->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="preload stylesheet" type="text/css" media="all" as="style" />
+    <link href="~/Template/admin/css/fa.css" rel="preload stylesheet" media="all" as="style" />
+    <link href="~/Template/admin/style.css" rel="preload stylesheet" type="text/css" media="all" as="style" />
+    <link href="~/Template/admin/css/responsive.css" rel="preload stylesheet" media="all" as="style" />
+    <link href="~/Scripts/toastr.js/toastr.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">*@
+    @*<link href="~/Content/dataTables.bootstrap4.css" rel="stylesheet" />*@
+    @*@Scripts.Render("~/Template/admin")*@
+    @RenderSection("style", required: false)
+</head>
+
+<body id="MainBody">
+
+    <div id="Body"></div>
+    <div id="ajax-loader"></div>
+    <!-- Begin page -->
+
+    <div class="wrapper">
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="leftside-menu">
+            <div class="logo-bar">
+                <!-- LOGO -->
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("SuperAdmin"))
+                    {
+                        <a href="@Url.Action("Index", "Offer")" class="logo text-center logo-light">
+                            <span class="logo-lg">
+                                <img src="~/Template/admin/images/logo.png" class="img-fluid" />
+
+                            </span>
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="logo-lg">
+                            <img src="~/Template/admin/images/logo.png" class="img-fluid" />
+
+                        </span>
+                    }
+                }
+
+                <div class="user-btn">
+                    @*<div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell-o"></i></button>
+                            <ul class="dropdown-menu" aria-labelledby="">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </div>*@
+                    @*<div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
+                            <ul class="dropdown-menu" aria-labelledby="">
+                                <li><a class="dropdown-item" href="#">Action 1</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </div>*@
+                </div>
+                <a href="#" class="logo text-center logo-dark">
+                    <span class="logo-lg">
+                        <img src="~/Template/admin/images/logo.png" alt="" height="16" />
+                    </span>
+                    <span class="logo-sm">
+                        <img src="~/Template/admin/images/logo.png" alt="" height="16" />
+                    </span>
+                </a>
+            </div>
+
+            <div class="h-100" id="leftside-menu-container" data-simplebar>
+                <!--- Sidemenu -->
+                <ul class="side-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("SuperAdmin"))
+                        {
+                            @*<li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "UserMasters" && ViewContext.RouteData.Values["Action"].ToString() == "create" ? "active menuitem-active" : "")">
+                                    <a href="@Url.Action("create", "UserMasters")" class="side-nav-link">
+                                        <img src="~/Template/admin/images/icon/create-user.png" />
+                                        <span>Create User </span>
+                                    </a>
+                                </li>*@
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "UserMasters" && ViewContext.RouteData.Values["Action"].ToString() == "index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("index", "UserMasters")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/icon/user-listing.png" />
+                                    <span>User Listing</span>
+                                    <span class="menu-arrow" data-bs-toggle="collapse" href="#UserListing" aria-expanded="false" aria-controls="UserListing"><i class="fa fa-angle-right"></i></span>
+                                </a>
+                            </li>
+                            @*<li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "KeyManagerMaster" && ViewContext.RouteData.Values["Action"].ToString() == "create" ? "active menuitem-active" : "")">
+                                    <a href="@Url.Action("create", "KeyManagerMaster")" class="side-nav-link">
+                                        <img src="~/Template/admin/images/icon/create-user.png" />
+                                        <span>Create Key Manager </span>
+                                    </a>
+                                </li>*@
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "KeyManagerMaster" && ViewContext.RouteData.Values["Action"].ToString() == "index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("index", "KeyManagerMaster")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/icon/user-listing.png" />
+                                    <span>Key Master Listing</span>
+                                    <span class="menu-arrow" data-bs-toggle="collapse" href="#UserListing" aria-expanded="false" aria-controls="UserListing"><i class="fa fa-angle-right"></i></span>
+                                </a>
+                            </li>
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "FIleupload" && ViewContext.RouteData.Values["Action"].ToString() == "UploadFiles" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("UploadFiles", "FIleupload")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Upload Excel</span>
+                                </a>
+                            </li>
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Offer List</span>
+                                </a>
+                            </li>
+
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "Order")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Order List</span>
+                                </a>
+                            </li>
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Summary" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "Summary")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Summary</span>
+                                </a>
+                            </li>
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "PendingInvoice" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "PendingInvoice")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Pending Invoice</span>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Offer List</span>
+                                </a>
+                            </li>
+
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "Order")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Order List</span>
+                                </a>
+                            </li>
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Summary" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "Summary")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Summary</span>
+                                </a>
+                            </li>
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "PendingInvoice" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "PendingInvoice")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Pending Invoice</span>
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+
+                <div class="left-filter" style="display:none;">
+                    <div id="offerfiltersection">
+                        <div class="filter1">
+                            <div class="name">
+                                Offer no
+                            </div>
+                            <div>
+                                <select id="ddlOfferNo">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtOfferNo"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Customer Name
+                            </div>
+                            <div class="">
+                                <select id="ddlCustName">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtCustName"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Customer code
+                            </div>
+                            <div class="">
+                                <select id="ddlCustCode">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtCustCode"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Material code
+                            </div>
+                            <div class="">
+                                <select id="ddlMaterialCode">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtMaterialCode"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Material description
+                            </div>
+                            <div class="">
+                                <select id="ddlMaterialDesc">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtMaterialDesc"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Key account manager
+                            </div>
+                            <div class="">
+                                <select id="ddlKeyManager">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtKeyManager"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Inquiry Ref
+                            </div>
+                            <div class="">
+                                <select id="ddlInquiryRef">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtInquiryRef"></div>
+                        </div>
+                    </div>
+                    <div class="option-menu">
+                        <div class="menu-box1" id="offerSearch"><i class="fa fa-search" aria-hidden="true"></i></div>
+                        <div class="menu-box2" id="offerfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+                        <div class="menu-box3" id="offerSearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+
+                <div class="left-filter1" style="display:none;">
+                    <div id="pendingInvfiltersection">
+                        <div class="filter1">
+                            <div class="name">
+                                Invoice No
+                            </div>
+                            <div>
+                                <select id="ddlInvoiceNo">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtInvoiceNo"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Customer Name
+                            </div>
+                            <div class="">
+                                <select id="ddlPICustName">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtPICustName"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Customer code
+                            </div>
+                            <div class="">
+                                <select id="ddlPICustCode">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtPICustCode"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Key account manager
+                            </div>
+                            <div class="">
+                                <select id="ddlPIKeyManager">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtPIKeyManager"></div>
+                        </div>
+                    </div>
+                    <div class="option-menu">
+                        <div class="menu-box1" id="PISearch"><i class="fa fa-search" aria-hidden="true"></i></div>
+                        <div class="menu-box2" id="PIfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+                        <div class="menu-box3" id="PISearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+                @*<div class="left-filter2" style="display:none;">
+                    <div id="summaryfiltersection">
+                        <div class="filter1">
+                            <div class="name">
+                                Key account manager
+                            </div>
+                            <div class="">
+                                <select id="ddlSKeyManager">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtSKeyManager"></div>
+                        </div>
+                    </div>
+                    <div class="option-menu">
+                        <div class="menu-box1" id="SummarySearch"><i class="fa fa-search" aria-hidden="true"></i></div>
+                        <div class="menu-box2" id="Summaryfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+                        <div class="menu-box3" id="SummarySearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                    </div>
+                </div>*@
+                <div class="left-filter3" style="display:none;">
+                    <div id="orderfiltersection">
+                        <div class="filter1">
+                            <div class="name">
+                                SO No
+                            </div>
+                            <div>
+                                <select id="ddlSONo">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtSONo"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Customer Name
+                            </div>
+                            <div class="">
+                                <select id="ddlOCustName">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtOCustName"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Customer code
+                            </div>
+                            <div class="">
+                                <select id="ddlOCustCode">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtOCustCode"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Material code
+                            </div>
+                            <div class="">
+                                <select id="ddlOMaterialCode">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtOMaterialCode"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Material description
+                            </div>
+                            <div class="">
+                                <select id="ddlOMaterialDesc">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtOMaterialDesc"></div>
+                        </div>
+                        <div class="filter1">
+                            <div class="name">
+                                Key account manager
+                            </div>
+                            <div class="">
+                                <select id="ddlOKeyManager">
+                                    <option value="0">Eq</option>
+                                    <option value="1">!Eq</option>
+                                    <option value="2">In</option>
+                                    <option value="3">!In</option>
+                                    <option value="4">Contains</option>
+                                    <option value="5">!Contains</option>
+                                </select>
+                            </div>
+                            <div class=""><input type="text" name="" value="" id="txtOKeyManager"></div>
+                        </div>
+                        @*<div class="filter1">
+                                <div class="name">
+                                    PO Ref
+                                </div>
+                                <div class="">
+                                    <select id="ddlOPORef">
+                                        <option value="0">Eq</option>
+                                        <option value="1">!Eq</option>
+                                        <option value="2">In</option>
+                                        <option value="3">!In</option>
+                                    </select>
+                                </div>
+                                <div class=""><input type="text" name="" value="" id="txtOPORef"></div>
+                            </div>
+                            <div class="filter1">
+                                <div class="name">
+                                    Division
+                                </div>
+                                <div class="">
+                                    <select id="ddlODivision">
+                                        <option value="0">Eq</option>
+                                        <option value="1">!Eq</option>
+                                        <option value="2">In</option>
+                                        <option value="3">!In</option>
+                                    </select>
+                                </div>
+                                <div class=""><input type="text" name="" value="" id="txtODivision"></div>
+                            </div>
+                            <div class="filter1">
+                                <div class="name">
+                                    Week / Year
+                                </div>
+                                <div class="">
+                                    <select id="ddlOWeekYear">
+                                        <option value="0">Eq</option>
+                                        <option value="1">!Eq</option>
+                                        <option value="2">In</option>
+                                        <option value="3">!In</option>
+                                    </select>
+                                </div>
+                                <div class=""><input type="text" name="" value="" id="txtOWeekYear"></div>
+                            </div>*@
+                    </div>
+                    <div class="option-menu">
+                        <div class="menu-box1" id="orderSearch"><i class="fa fa-search" aria-hidden="true"></i></div>
+                        <div class="menu-box2" id="orderfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+                        <div class="menu-box3" id="orderSearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+                <!-- End Sidebar -->
+                <div class="clearfix"></div>
+            </div>
+
+
+            <!-- Sidebar -left -->
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page" id="Content">
+            <div class="content">
+                <!-- Topbar Start -->
+                <div class="navbar-custom">
+                    <!-- top bar -->
+                    <div class="tophead">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="inner-box">
+                                        <div class="head-title">
+                                            <h1>@ViewBag.Title</h1>
+                                        </div>
+                                        <div class="right-side">
+                                            <ul>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+
+                                                    <li>@Session["UserName"]</li>
+
+                                                    @*<li>
+                                                            <div class="dropdown">
+                                                                <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="~/Template/admin/images/avatars.png" alt="profile image" class="img-fluid rounded-circle avatar" /></a>
+                                                                <ul class="dropdown-menu border-0" aria-labelledby="dropdownMenuLink">
+                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; My Profile</a></li>
+                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; Settings</a></li>
+                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-sign-in"></i> &nbsp; Logout</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>*@
+                                                    @*<li>
+                                                            <div class="dropdown">
+                                                                <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                                                <ul class="dropdown-menu border-0" aria-labelledby="dropdownMenuLink">
+                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; My Profile</a></li>
+                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; Settings</a></li>
+                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-sign-in"></i> &nbsp; Logout</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>*@
+                                                    <li>
+                                                        <div class="dropdown">
+
+                                                            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                            <ul class="dropdown-menu border-0" aria-labelledby="dropdownMenuLink">
+                                                                <li><a class="dropdown-item" href="@Url.Action("ShowProfile", "Home")"><i class="fa fa-gear"></i> &nbsp; My Profile</a></li>
+                                                                @*<li><a class="dropdown-item" id="profileid" href="javascript:;"><i class="fa fa-gear"></i> &nbsp; My Profile</a></li>*@
+                                                                <li><a class="dropdown-item" href="@Url.Action("ChangePassword", "Home")"><i class="fa fa-gear"></i> &nbsp; Change Password</a></li>
+                                                                <li><a class="dropdown-item" href="@Url.Action("Logout", "Home")"><i class="fa fa-sign-in"></i> &nbsp; Logout</a></li>
+                                                            </ul>
+
+                                                        </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- # top bar -->
+                </div>
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+                    <!-- user data -->
+                    <div class="row">
+                        @RenderBody()
+                        @*<div class="col-xl-12 g-xl-0 g-lg-0">
+                                <div class="game_show" id="upload-documen">
+                                    <div class="row justify-content-center">
+                                        @RenderBody()
+                                        <div class="col-xl-9 col-md-10 col-lg-10">
+                                                @RenderBody()
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+                    <!-- # user data -->
+                </div>
+                <!-- # container -->
+            </div>
+
+            <!-- mobile menu -->
+            <nav class="nav mobile-menu">
+                <div class="container">
+                    <div class="logo">
+                        <a href="@Url.Action("Index", "Offer")"><img src="~/Template/admin/images/m-logo.png" class="img-fluid" /></a>
+                    </div>
+
+                    <div id="mainListDiv" class="main_list">
+
+                        <ul class="side-nav">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                if (User.IsInRole("SuperAdmin"))
+                                {
+                                    @*<li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "UserMasters" && ViewContext.RouteData.Values["Action"].ToString() == "create" ? "active menuitem-active" : "")">
+                                            <a href="@Url.Action("create", "UserMasters")" class="side-nav-link">
+                                                <img src="~/Template/admin/images/icon/create-user.png" />
+                                                <span>Create User </span>
+                                            </a>
+                                        </li>*@
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "UserMasters" && ViewContext.RouteData.Values["Action"].ToString() == "index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("index", "UserMasters")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/icon/user-listing.png" />
+                                            <span>User Listing</span>
+                                            <span class="menu-arrow" data-bs-toggle="collapse" href="#UserListing" aria-expanded="false" aria-controls="UserListing"><i class="fa fa-angle-right"></i></span>
+                                        </a>
+                                    </li>
+                                    @*<li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "KeyManagerMaster" && ViewContext.RouteData.Values["Action"].ToString() == "create" ? "active menuitem-active" : "")">
+                                            <a href="@Url.Action("create", "KeyManagerMaster")" class="side-nav-link">
+                                                <img src="~/Template/admin/images/icon/create-user.png" />
+                                                <span>Create Key Manager </span>
+                                            </a>
+                                        </li>*@
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "KeyManagerMaster" && ViewContext.RouteData.Values["Action"].ToString() == "index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("index", "KeyManagerMaster")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/icon/user-listing.png" />
+                                            <span>Key Master Listing</span>
+                                            <span class="menu-arrow" data-bs-toggle="collapse" href="#UserListing" aria-expanded="false" aria-controls="UserListing"><i class="fa fa-angle-right"></i></span>
+                                        </a>
+                                    </li>
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "FIleupload" && ViewContext.RouteData.Values["Action"].ToString() == "UploadFiles" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("UploadFiles", "FIleupload")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Upload Excel</span>
+                                        </a>
+                                    </li>
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Offer List</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "Order")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Order List</span>
+                                        </a>
+                                    </li>
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Summary" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "Summary")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Summary</span>
+                                        </a>
+                                    </li>
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "PendingInvoice" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "PendingInvoice")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Pending Invoice</span>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Offer List</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "Order")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Order List</span>
+                                        </a>
+                                    </li>
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Summary" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "Summary")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Summary</span>
+                                        </a>
+                                    </li>
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "PendingInvoice" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "PendingInvoice")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Pending Invoice</span>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+
+                        <div class="left-filter" style="display:none;">
+                            <div id="offerfiltersection">
+                                <div class="filter1">
+                                    <div class="name">
+                                        Offer no
+                                    </div>
+                                    <div>
+                                        <select id="ddlOfferNo">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtOfferNo"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Customer Name
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlCustName">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtCustName"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Customer code
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlCustCode">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtCustCode"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Material code
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlMaterialCode">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtMaterialCode"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Material description
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlMaterialDesc">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtMaterialDesc"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Key account manager
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlKeyManager">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtKeyManager"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Inquiry Ref
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlInquiryRef">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtInquiryRef"></div>
+                                </div>
+                            </div>
+                            <div class="option-menu">
+                                <div class="menu-box1" id="offerSearch"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                <div class="menu-box2" id="offerfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+                                <div class="menu-box3" id="offerSearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="left-filter1" style="display:none;">
+                            <div id="pendingInvfiltersection">
+                                <div class="filter1">
+                                    <div class="name">
+                                        Invoice No
+                                    </div>
+                                    <div>
+                                        <select id="ddlInvoiceNo">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtInvoiceNo"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Customer Name
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlPICustName">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtPICustName"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Customer code
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlPICustCode">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtPICustCode"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Key account manager
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlPIKeyManager">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtPIKeyManager"></div>
+                                </div>
+                            </div>
+                            <div class="option-menu">
+                                <div class="menu-box1" id="PISearch"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                <div class="menu-box2" id="PIfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+                                <div class="menu-box3" id="PISearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                            </div>
+                        </div>
+                        @*<div class="left-filter2" style="display:none;">
+                            <div id="summaryfiltersection">
+                                <div class="filter1">
+                                    <div class="name">
+                                        Customer Name
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlSCustName">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtSCustName"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Customer code
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlSCustCode">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtSCustCode"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Key account manager
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlSKeyManager">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtSKeyManager"></div>
+                                </div>
+                            </div>
+                            <div class="option-menu">
+                                <div class="menu-box1" id="SummarySearch"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                <div class="menu-box2" id="Summaryfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+                                <div class="menu-box3" id="SummarySearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                            </div>
+                        </div>*@
+                        <div class="left-filter3" style="display:none;">
+                            <div id="orderfiltersection">
+                                <div class="filter1">
+                                    <div class="name">
+                                        SO No
+                                    </div>
+                                    <div>
+                                        <select id="ddlSONo">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtSONo"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Customer Name
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlOCustName">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtOCustName"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Customer code
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlOCustCode">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtOCustCode"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Material code
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlOMaterialCode">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtOMaterialCode"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Material description
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlOMaterialDesc">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtOMaterialDesc"></div>
+                                </div>
+                                <div class="filter1">
+                                    <div class="name">
+                                        Key account manager
+                                    </div>
+                                    <div class="">
+                                        <select id="ddlOKeyManager">
+                                            <option value="0">Eq</option>
+                                            <option value="1">!Eq</option>
+                                            <option value="2">In</option>
+                                            <option value="3">!In</option>
+                                            <option value="4">Contains</option>
+                                            <option value="5">!Contains</option>
+                                        </select>
+                                    </div>
+                                    <div class=""><input type="text" name="" value="" id="txtOKeyManager"></div>
+                                </div>
+                                @*<div class="filter1">
+                                        <div class="name">
+                                            PO Ref
+                                        </div>
+                                        <div class="">
+                                            <select id="ddlOPORef">
+                                                <option value="0">Eq</option>
+                                                <option value="1">!Eq</option>
+                                                <option value="2">In</option>
+                                                <option value="3">!In</option>
+                                            </select>
+                                        </div>
+                                        <div class=""><input type="text" name="" value="" id="txtOPORef"></div>
+                                    </div>
+                                    <div class="filter1">
+                                        <div class="name">
+                                            Division
+                                        </div>
+                                        <div class="">
+                                            <select id="ddlODivision">
+                                                <option value="0">Eq</option>
+                                                <option value="1">!Eq</option>
+                                                <option value="2">In</option>
+                                                <option value="3">!In</option>
+                                            </select>
+                                        </div>
+                                        <div class=""><input type="text" name="" value="" id="txtODivision"></div>
+                                    </div>
+                                    <div class="filter1">
+                                        <div class="name">
+                                            Week / Year
+                                        </div>
+                                        <div class="">
+                                            <select id="ddlOWeekYear">
+                                                <option value="0">Eq</option>
+                                                <option value="1">!Eq</option>
+                                                <option value="2">In</option>
+                                                <option value="3">!In</option>
+                                            </select>
+                                        </div>
+                                        <div class=""><input type="text" name="" value="" id="txtOWeekYear"></div>
+                                    </div>*@
+                            </div>
+                            <div class="option-menu">
+                                <div class="menu-box1" id="orderSearch"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                <div class="menu-box2" id="orderfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+                                <div class="menu-box3" id="orderSearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                            </div>
+                        </div>
+                        <!-- End Sidebar -->
+
+                    </div>
+                    <span class="navTrigger">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </span>
+                </div>
+            </nav>
+            <!-- # mobile menu -->
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p>
+                                <script>document.write(new Date().getFullYear());</script> &copy; Vulcan
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- # Footer -->
+        </div>
+
+    </div>
+    <!-- END wrapper -->
+    <!-- bundle -->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js" integrity="sha512-DedNBWPF0hLGUPNbCYfj8qjlEnNE92Fqn7xd3Sscfu7ipy7Zu33unHdugqRD3c4Vj7/yLv+slqZhMls/4Oc7Zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @*<script src="~/Scripts/datatables-demo.js"></script>
+        <script src="~/Scripts/datatables.net/DataTableJS/jquery.dataTables.min.js"></script>*@
+    <script src="~/Scripts/Site.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /* ==== mobile JS ==== */
+        $(window).scroll(function () {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+                console.log("OK");
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+        $('.navTrigger').click(function () {
+            $(this).toggleClass('active');
+            console.log("Clicked menu");
+            $("#mainListDiv").toggleClass("show_list");
+            $("#mainListDiv").fadeIn();
+
+        });
+
+        function showfilers(id) {
+            debugger;
+            if (id == "1") {
+                $(".left-filter").show();
+                return true;
+            }
+        }
+                    /* ==== # mobile JS ==== */
+    </script>
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
+    @*<script src="~/OldTemplate/js/demo/datatables-demo.js"></script>
+        <script src="~/Scripts/datatables.net/DataTableJS/dataTables.bootstrap4.min.js"></script>*@
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

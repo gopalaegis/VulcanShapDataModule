@@ -1,0 +1,106 @@
+﻿
+
+@model PagedList.IPagedList<DAL.UserMaster>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    var EID = "";
+    var DID = "";
+    var i = 0;
+}
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href=" @Url.Action("Create", "UserMasters")">
+        <i class="fa fa-plus"></i> Add User
+    </a>
+</p>
+<div class="col-xl-12">
+    <div class="card-box">
+
+        @foreach (var item in Model)
+        {
+            i++;
+            EID = "E_" + item.ID;
+            DID = "D_" + item.ID;
+            var istrue = item.IsActive ? 1 : 0;
+
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title getuid" style="cursor:pointer" id="@EID">@Html.DisplayFor(modelItem => item.FirstName)</h2>
+                    <ul class="card-text">
+                        <li>Email: @Html.DisplayFor(modelItem => item.EmailID)</li>
+                        <li>User: @Html.DisplayFor(modelItem => item.FirstName)</li>
+                    </ul>
+                    @*<div class="foot-card">
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="e1">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="e1" value="e2"  />
+                                    <span class="checkmark"></span> Enable
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="d1">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="d1" value="d2" />
+                                    <span class="checkmark"></span> Disable
+                                </label>
+                            </div>
+                            <div>
+                                <a href="#" class="get-pass"><i class="fa fa-lock"></i> Generate Password</a>
+                            </div>
+                        </div>*@
+                    <div class="foot-card">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="@i" id="@EID" value="1" @(item.IsActive == true ? "checked=true" : "") />
+                                <span class="checkmark"></span> Enable
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="@i" id="@DID" value="0" @(item.IsActive == false ? "checked=true" : "") />
+                                <span class="checkmark"></span> Disable
+                            </label>
+                        </div>
+                        <div>
+                            @*<a href="#" class="get-pass" id="@EID" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa fa-lock"></i> Generate Password</a>*@
+                            <a href="#" class="get-pass" id="@EID"><i class="fa fa-lock"></i> Generate Password</a>
+                        </div>
+                    </div>
+
+                    <!--<div class="foot-card">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="@EID">
+                                <input class="form-check-input" type="radio" name="@EID" id="@EID" value="1" @(item.IsActive == true ? "checked=true" : "") />
+                                <span class="checkmark"></span>Enable
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="@DID">
+                                <input class="form-check-input" type="radio" name="@EID" id="@DID" value="0" @(item.IsActive == false ? "checked=true" : "") />
+                                <span class="checkmark"></span> Disable
+                            </label>
+                        </div>
+                    <div>-->
+                    @*<a href="#" class="get-pass" id="@EID" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa fa-lock"></i> Generate Password</a>*@
+                    <!--<a href="#" class="get-pass" id="@EID"><i class="fa fa-lock"></i> Generate Password</a>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+
+
+        }
+
+
+    </div>
+</div>
+<div class="col-xl-12">
+    <div class="pagination">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("GetUserRecord", new { sortOrder = ViewBag.CurrentSort, pagesize = ViewBag.CurrentPageSize, pagenumber = page }))
+    </div>
+</div>
+
+

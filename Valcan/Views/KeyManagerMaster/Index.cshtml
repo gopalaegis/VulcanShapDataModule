@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DAL.KeyManagerMaster>
+
+@{
+    ViewBag.Title = "Key Manager List";
+}
+<link href="~/Scripts/JQueryDataTable/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Scripts/JQueryDataTable/responsive.dataTables.min.css" rel="stylesheet" />
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href=" @Url.Action("Create", "KeyManagerMaster")">
+        <i class="fa fa-plus"></i> Add Key Manager
+    </a>
+</p>
+<table id="dataTable" class="display responsive nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyManager)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyManager_Name)
+            </th>
+            @* <th>
+        @Html.DisplayName("Is Active?")
+
+            </th>*@
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KeyManager)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KeyManager_Name)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>*@
+            <td>
+
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+
+                <a href="@Url.Action("Edit", "KeyManagerMaster", new { id = item.ID })" class="btn-icon editid">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="@Url.Action("Delete", "KeyManagerMaster", new { id = item.ID })" class="btn-icon">
+                    <i class="fa fa-times-circle"></i>
+                </a>
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script src="~/Scripts/JQueryDataTable/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/JQueryDataTable/dataTables.responsive.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+
+        });
+
+    </script>
+}

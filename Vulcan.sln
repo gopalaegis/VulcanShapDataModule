@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32802.440
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{075856A2-2441-4931-BEE2-A283C4631E05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valcan", "Valcan\Valcan.csproj", "{403F255A-B25B-47F9-8F23-9360D3C30D37}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{075856A2-2441-4931-BEE2-A283C4631E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{075856A2-2441-4931-BEE2-A283C4631E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{075856A2-2441-4931-BEE2-A283C4631E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{075856A2-2441-4931-BEE2-A283C4631E05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{403F255A-B25B-47F9-8F23-9360D3C30D37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{403F255A-B25B-47F9-8F23-9360D3C30D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{403F255A-B25B-47F9-8F23-9360D3C30D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{403F255A-B25B-47F9-8F23-9360D3C30D37}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51C6AE05-CB3A-4594-A6DE-2C9D5B107B74}
+	EndGlobalSection
+EndGlobal

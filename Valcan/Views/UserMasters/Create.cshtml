@@ -1,0 +1,266 @@
+﻿@model Valcan.Models.CreateUserViewModel
+
+@{
+    ViewBag.Title = "Create User";
+}
+@Html.Partial("_Notification")
+<style>
+    .hide {
+        display: none;
+    }
+
+    .error {
+        display: block;
+    }
+
+    .iti {
+        width: 100% !important;
+    }
+</style>
+@*<link href="~/Scripts/CountryCodeJS/intlTelInput.css" rel="stylesheet" />*@
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/css/intlTelInput.css">*@
+<link href="~/Scripts/CountryCodeJS/css/intlTelInput.css" rel="stylesheet" />
+<div class="col-xl-12">
+    <div class="game_show" id="create-user">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-7 col-lg-7">
+
+                @using (Html.BeginForm("Create", "UserMasters", new { }, FormMethod.Post, new { enctype = "multipart/form-data", autocomplete = "off", @class = "login_form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(model => model.ID)
+
+
+                    <div class="form-group">
+                        @Html.Label("First Name")
+
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Your First Name" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName)<br />
+
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", id = "txtPhone", placeholder = "Enter Your Contact number" } })
+
+                        <br />
+                        <span id="valid-msg" class="hide text-success">✓ Valid</span>
+                        <span id="error-msg" class="hide text-danger"></span>
+                        <br />
+
+                        @*@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })*@
+
+                    </div>
+                    @Html.HiddenFor(model => model.countryflag)
+                    <div class="form-group">
+                        @Html.Label("Username")
+
+                        @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { autocomplete = "off", @class = "form-control", placeholder = "Enter Your Email ID" } })
+                        @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Password")
+
+                        @*@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control",id="password", placeholder = "Enter Your Password", type = "password" } })
+                <i class="fa fa-eye-slash" id="togglePassword"></i><br />*@
+                        <div style="display: flex;">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control valid", id = "password", placeholder = "Enter Your Password", type = "password" } })
+                            <span class="input-group-append">
+                                <div class="input-group-text bg-transparent" style="height:40px;">
+                                    <i class="fa fa-eye-slash" id="togglePassword"></i>
+                                </div>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+
+                    </div>
+                    <div class="form-group mb-1">
+                        <p class="mb-1">Key Manager</p>
+                    </div>
+
+                    foreach (var choice in Model.KMChoicesVM)
+                    {
+                        <div class="form-group form-check">
+                            <input id="choice@(choice.SNo)"
+                                   type="checkbox"
+                                   class="form-check-input"
+                                   name="SelectedChoices"
+                                   value="@choice.SNo"
+                                   @(Model.SelectedChoices.Contains(choice.SNo) ? "checked" : "") />
+                            @*<span class="checkmark"></span> check-tc*@
+                            <label class="form-check-label" for="operator@(choice.SNo)">@choice.Text</label>
+                        </div>
+
+                    }
+                    <div class="form-group mb-1">
+                        <p class="mb-1">Roles</p>
+                    </div>
+
+                    foreach (var choice in Model.ChoicesVM)
+                    {
+                        <div class="form-group form-check">
+                            <input id="rolechoice@(choice.SNo)"
+                                   type="radio"
+                                   class="form-check-input"
+                                   name="SelectedRoleChoices"
+                                   value="@choice.SNo"
+                                   @(Model.SelectedRoleChoices.Contains(choice.SNo) ? "checked" : "") />
+                            @*<span class="checkmark"></span> check-tc*@
+                            <label class="form-check-label" for="operator@(choice.SNo)">@choice.Text</label>
+                        </div>
+
+                    }
+                    <br />
+                    <span id="errormsg" class="hide text-danger"></span>
+
+                    @*<div class="form-group">
+                @Html.Label("Change Password Interval")
+
+                @Html.EditorFor(model => model.ChangePasswordInterval, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ChangePasswordInterval, "", new { @class = "text-danger" })
+
+            </div>*@
+
+
+
+                    <div class="submit-box mt-2">
+                        <button type="submit" class="btn submit-btn">Create User</button>
+                    </div>
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    //Script For Show icon for password
+
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#password");
+
+    togglePassword.addEventListener("click", function () {
+        // toggle the type attribute
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+
+        // toggle the icon
+        $(this).toggleClass("fa-eye fa-eye-slash");
+    });
+</script>
+@section Scripts {
+    @*<script src="~/Scripts/CountryCodeJS/intlTelInput-jquery.min.js"></script>*@
+    @*<script src="~/Scripts/CountryCodeJS/util.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/intlTelInput-jquery.min.js"></script>*@
+    @*<script type="text/javascript">
+            var iti;
+            $(function () {
+                var code = "+91"; // Assigning value from model.
+                $('#txtPhone').val(code);
+                iti = $('#txtPhone').intlTelInput({
+                    autoHideDialCode: true,
+                    autoPlaceholder: "ON",
+                    dropdownContainer: document.body,
+                    formatOnDisplay: true,
+                    hiddenInput: "full_number",
+                    initialCountry: "auto",
+
+
+                    nationalMode: true,
+                    placeholderNumberType: "MOBILE",
+                    preferredCountries: ['US'],
+
+                    separateDialCode: true
+                });
+
+            });
+            $('.submit-btn').on('click', function () {
+
+
+                $('#countryflag').val($("#txtPhone").intlTelInput("getSelectedCountryData").dialCode);
+                if (iti.isValidNumber()) {
+                    alert("1");
+                }
+            });
+        </script>*@
+    <script src="~/Scripts/CountryCodeJS/js/intlTelInput.min.js"></script>
+    <script src="~/Scripts/CountryCodeJS/js/intlTelInput-jquery.min.js"></script>
+    <script>
+        var input = document.querySelector("#txtPhone"),
+            errorMsg = document.querySelector("#error-msg"),
+            validMsg = document.querySelector("#valid-msg");
+        var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        var iti = window.intlTelInput(input, {
+            utilsScript: "../../Scripts/CountryCodeJS/js/utils.js",
+            separateDialCode: true
+        });
+
+        var reset = function () {
+            input.classList.remove("error");
+            errorMsg.innerHTML = "";
+            errorMsg.classList.add("hide");
+            validMsg.classList.add("hide");
+        };
+
+        // on blur: validate
+        input.addEventListener('blur', function () {
+            reset();
+            if (input.value.trim()) {
+                if (iti.isValidNumber()) {
+                    validMsg.classList.remove("hide");
+                } else {
+                    input.classList.add("error");
+                    var errorCode = iti.getValidationError();
+                    if (errorMap[errorCode] != undefined && errorMap[errorCode] != null)
+                        errorMsg.innerHTML = errorMap[errorCode];
+                    else
+                        errorMsg.innerHTML ="Invalid number";
+                    errorMsg.classList.remove("hide");
+                }
+            }
+        });
+
+        // on keyup / change flag: reset
+        input.addEventListener('change', reset);
+        input.addEventListener('keyup', reset);
+
+        $('.submit-btn').on('click', function () {
+
+            if (iti.isValidNumber()) {
+                $('#countryflag').val(iti.getSelectedCountryData().dialCode);
+            }
+            else {
+                document.getElementById("txtPhone").focus();
+                return false;
+            }
+
+            var msg = document.getElementById('errormsg');
+            msg.innerHTML = "";
+            msg.classList.add("hide");
+            var len = document.querySelectorAll('input[type="checkbox"]:checked').length
+            if (len <= 0) {
+                msg.innerHTML = "Please check at least one Key Manager.";
+                msg.classList.remove("hide");
+                return false;
+            }
+            var len = document.querySelectorAll('input[type="radio"]:checked').length
+            if (len <= 0) {
+                msg.innerHTML = "Please check at least one role.";
+                msg.classList.remove("hide");
+                return false;
+            }
+        });
+    </script>
+}
+
+
+
+

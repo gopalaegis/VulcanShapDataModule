@@ -1,0 +1,143 @@
+﻿@model DocumentManagement.Models.UserMasterViewModel
+
+@{
+    ViewBag.Title = "User Profile";
+}
+@Html.Partial("_Notification")
+<style>
+    .hide {
+        display: none;
+    }
+
+    .error {
+        display: block;
+    }
+
+    .iti {
+        width: 100% !important;
+    }
+</style>
+<link href="~/Scripts/CountryCodeJS/css/intlTelInput.css" rel="stylesheet" />
+
+<div class="col-xl-12">
+    <div class="game_show" id="create-user">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-7 col-lg-7">
+                @using (Html.BeginForm("EditProfile", "Home", new { }, FormMethod.Post, new { @class = "login_form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.ID);
+                    <div class="form-group">
+                        <label>Name</label>
+
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email ID</label>
+
+                        @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "form-control" } })
+
+                        @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Number</label>
+
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", id = "txtPhone" } })
+
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        <br />
+                        <span id="valid-msg" class="hide text-success">✓ Valid</span>
+                        <span id="error-msg" class="hide text-danger"></span>
+                        <br />
+
+
+                    </div>
+                    @Html.HiddenFor(model => model.countryflag)
+
+                    <div class="submit-box mt-2">
+                        <button type="submit" class="btn submit-btn">Save</button>
+                    </div>
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/CountryCodeJS/js/intlTelInput.min.js"></script>
+    <script src="~/Scripts/CountryCodeJS/js/intlTelInput-jquery.min.js"></script>
+    <script>
+        var input = document.querySelector("#txtPhone"),
+            errorMsg = document.querySelector("#error-msg"),
+            validMsg = document.querySelector("#valid-msg");
+        var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        var iti = window.intlTelInput(input, {
+            utilsScript: "../../Scripts/CountryCodeJS/js/utils.js",
+            separateDialCode: true
+        });
+
+        var reset = function () {
+            input.classList.remove("error");
+            errorMsg.innerHTML = "";
+            errorMsg.classList.add("hide");
+            validMsg.classList.add("hide");
+        };
+
+        // on blur: validate
+        input.addEventListener('blur', function () {
+            reset();
+            if (input.value.trim()) {
+                if (iti.isValidNumber()) {
+                    validMsg.classList.remove("hide");
+                } else {
+                    input.classList.add("error");
+                    var errorCode = iti.getValidationError();
+                    if (errorMap[errorCode] != undefined && errorMap[errorCode] != null)
+                        errorMsg.innerHTML = errorMap[errorCode];
+                    else
+                        errorMsg.innerHTML = "Invalid number";
+                    errorMsg.classList.remove("hide");
+                }
+            }
+        });
+
+        // on keyup / change flag: reset
+        input.addEventListener('change', reset);
+        input.addEventListener('keyup', reset);
+
+        $('.submit-btn').on('click', function () {
+
+            if (iti.isValidNumber()) {
+                $('#countryflag').val(iti.getSelectedCountryData().dialCode);
+            }
+            else {
+                document.getElementById("txtPhone").focus();
+                return false;
+            }
+
+            var msg = document.getElementById('errormsg');
+            msg.innerHTML = "";
+            msg.classList.add("hide");
+            var len = document.querySelectorAll('input[type="checkbox"]:checked').length
+            if (len <= 0) {
+                msg.innerHTML = "Please check at least one role.";
+                msg.classList.remove("hide");
+                return false;
+            }
+        });
+    </script>
+
+
+}
+
+
+
+

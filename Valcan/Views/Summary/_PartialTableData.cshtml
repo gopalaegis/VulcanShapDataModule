@@ -1,0 +1,143 @@
+﻿@model IEnumerable<Valcan.Models.SummaryViewModel>
+
+<div>
+    <b>Total Order Intake 2023	: </b> <label id="lbltotal1" style="color:red;"></label>
+    <br />
+    <b>Total Sales 2022-23 :</b> <label id="lbltotal2" style="color:red;"></label>
+    <br />
+    <b>Total Open Orders :</b> <label id="lbltotal3" style="color:red;"></label>
+
+</div>
+<br />
+<br />
+<table id="dataTable" class="display responsive nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Key Manager
+            </th>
+            @*<th>
+                    Customer count
+                </th>*@
+            <th>
+                Order Intake 2023
+            </th>
+            <th>
+                Sales 2022-23
+            </th>
+            <th>
+                Open Orders
+            </th>
+            <th>
+                Details
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelitem => item.KEYMANAGER)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelitem => item.Sold_to_party)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelitem => item.Incoming_orders_cast)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Sales_cast)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Open_orders_cast)
+                </td>
+                <td>
+                    <input type="button" value="show details" id="btndetails" onclick="return getDetails('@item.KEYMANAGER_id', '@item.KEYMANAGER');" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script>
+
+
+    if (!$.fn.DataTable.isDataTable('#dataTable')) {
+        $('#dataTable').dataTable({
+            bSort: false,
+            dom: 'Bfplrti', //'Blfrtip',
+            sScrollX: true,
+            sScrollY: true,
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All'],
+            ],
+            pageLength: 15,
+            buttons: [{
+                extend: 'excelHtml5',
+                text: 'Export to Excel',
+                autoFilter: true,
+                sheetName: 'Exported data'
+            }],
+            footerCallback: function (row, data, start, end, display) {
+                debugger;
+                var api = this.api();
+                pageTotal = api
+                    .column(1, { search: 'applied' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return parseFloat(a) + parseFloat(b);
+                    }, 0);
+
+                pageTotal2 = api
+                    .column(2, { search: 'applied' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return parseFloat(a) + parseFloat(b);
+                    }, 0);
+
+                pageTotal3 = api
+                    .column(3, { search: 'applied' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return parseFloat(a) + parseFloat(b);
+                    }, 0);
+                // Update footer
+                var orderintakeTotal = addCommas(parseInt(pageTotal))
+                var salesTot = addCommas(parseInt(pageTotal2))
+                var openorderTot = addCommas(parseInt(pageTotal3))
+                $("#lbltotal1").html(orderintakeTotal);
+                $("#lbltotal2").html(salesTot);
+                $("#lbltotal3").html(openorderTot);
+                //$(api.column(1).footer()).html('$' + pageTotal + ' ( $' + total + ' total)');
+                //$(api.column(2).footer()).html('$' + pageTotal2 + ' ( $' + total2 + ' total)');
+            },
+            columnDefs: [
+                {
+                    targets: [1],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                },
+                {
+                    targets: [2],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                },
+                {
+                    targets: [3],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                }
+            ],
+        });
+    }
+    $('body').find('.dataTables_scroll').wrap('<div id="scroll_div"></div>');
+    $('#scroll_div').doubleScroll();
+</script>
+
+

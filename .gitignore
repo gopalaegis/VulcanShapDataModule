@@ -1,0 +1,13 @@
+
+*.dll
+DAL/bin/Debug/DAL.dll.config
+*.pdb
+/.vs
+/DAL/bin
+/DAL/obj
+/packages
+/Valcan/App_Data
+/Valcan/bin
+/Valcan/Document
+/Valcan/obj
+/Vulcan

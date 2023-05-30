@@ -1,0 +1,347 @@
+﻿@model IEnumerable<DAL.UserMaster>
+
+@{
+    ViewBag.Title = "User List";
+
+}
+@Html.Partial("_Notification")
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/css/intlTelInput.css">
+
+
+<div class="col-xl-12 g-xl-0 g-lg-0">
+    <div class="game_show" id="user-listing">
+        <div id="alert_container"></div>
+        <div class="head-select-box">
+
+            <div class="count-pages select-group">
+                <p>Users per page: </p>
+                <select class="form-select" id="ddlPageSize">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="count-pages select-group">
+                <p>Sort by: </p>
+                <select class="form-select" id="ddlSortField">
+                    <option value="Name">Name</option>
+                    <option value="Id">Id</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" id="partialDiv">
+            @Html.Partial("_UserListing")
+
+        </div>
+    </div>
+</div>
+<div class="open-right-model flyoutLeft" id="editflyout1">
+    <div class="sidenav">
+        <a href="javascript:void(0)" class="closebtn cross1"><i class="fa fa-close"></i></a>
+    </div>
+    <div class="inner-box">
+        <div class="modal-body2">
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Generate Password</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="login_form">
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">New Password</label>
+                            @*<input type="password" class="form-control" id="newPassword">
+                                <i class="fa fa-eye-slash" id="togglePassword"></i>
+                                <br />*@
+                            <div style="display: flex;">
+                                <input class="form-control valid" id="newPassword" name="newPassword" placeholder="Password" type="password">
+                                <span class="input-group-append">
+                                    <div class="input-group-text bg-transparent" style="height:40px;">
+                                        <i class="fa fa-eye-slash" id="togglePassword"></i>
+                                    </div>
+                                </span>
+                            </div>
+                            <div id="passval"></div>
+                            <br />
+                            @*<div class="invalid-feedback">
+                                    Please Enter a Password.
+                                </div>*@
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmnewpassword" class="form-label">Confirm Password</label>
+                            @*<input type="password" class="form-control" id="confirmnewpassword">*@
+                            <div style="display: flex;">
+                                <input class="form-control valid" id="confirmnewpassword" name="confirmnewpassword" placeholder="Password" type="password">
+                                <span class="input-group-append">
+                                    <div class="input-group-text bg-transparent" style="height:40px;">
+                                        <i class="fa fa-eye-slash" id="togglePassword2"></i>
+                                    </div>
+                                </span>
+                            </div>
+                            <div id="confirmpassval"></div>
+                            @*<div class="invalid-feedback">
+                                    Please Enter a Password.
+                                </div>*@
+                        </div>
+
+                        <div class="submit-box mt-2">
+                            <button type="submit" class="btn btn-primary" onclick="return AjaxFormSubmit();">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/intlTelInput-jquery.min.js"></script>
+
+
+    <script type="text/javascript">
+        var sorder = 'Name';
+        var pagesize = 10;
+        var pageno = 1;
+        $(document).ready(function () {
+            bindUsers();
+            $("#ddlSortField").on("change", function () {
+                sorder = $(this).val();
+                bindUsers();
+            });
+            $("#ddlPageSize").on("change", function () {
+                pagesize = $(this).val();
+                bindUsers();
+            });
+
+
+        });
+
+        $(document).on('click', '.userpage', function () {
+            if (this.href != "") {
+                $.ajax({
+                    url: this.href,
+                    type: 'GET',
+                    data: "",
+                    contentType: 'application/json; charset=utf-8',
+                    cache: false,
+                    success: function (result) {
+                        $("#partialDiv").html(result);
+                        $('.pagination-container').find('a').each(function () {
+                            $(this).addClass("userpage");
+                        });
+                    }
+                });
+            }
+            return false;
+        });
+
+        var Userid = null;
+
+        $(document).on('click', '.get-pass', function () {
+
+            Userid = null;
+            Userid = $(this).attr('id');
+            $('#myModal').modal('show');
+        });
+
+        function bindUsers() {
+            $.ajax(
+                {
+                    url: '/UserMasters/GetUserRecord?sortOrder=' + sorder + '&pagesize=' + pagesize + '&pagenumber=' + pageno,
+                    type: 'GET',
+                    data: "",
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#partialDiv").html(data);
+                        $('.pagination-container').find('a').each(function () {
+                            $(this).addClass("userpage");
+                        });
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+        }
+
+        $(document).on('click', '.form-check-input', function () {
+            var ctrlType = $(this).attr('type');
+            if (ctrlType == "radio") {
+                var id = $(this).attr('id');
+                var flag = $(this).val();
+                // Disable your roomnumber element here
+                var postCall = $.post(GetSiteURL() + "/UserMasters/EnableOrDisableUser", { "UserID": id, "Flag": flag });
+                postCall.done(function (data) {
+                    if (data.Status == true) {
+                        ShowMessage(data.Message, 'success');
+
+                    }
+                    else {
+                        ShowMessage(data.Message, 'danger');
+
+                    }
+                }).fail(function () {
+                    ShowMessage("An unexpected error occcurred while processing request!", "danger");
+                });
+            }
+        });
+
+
+        function Validate() {
+
+            var newPassword = $("#newPassword").val();
+            var confirmnewpassword = $("#confirmnewpassword").val();
+            var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+
+            $(".text-danger").remove();
+            if (newPassword == "") {
+                $('#passval').after('<span class="text-danger">This field is required</span>');
+
+                return false;
+            }
+            if (confirmnewpassword == "") {
+                $('#confirmpassval').after('<span class="text-danger">This field is required</span>');
+                return false;
+            }
+            if (newPassword != confirmnewpassword) {
+                $('#confirmpassval').after('<span class="text-danger">Passwords does not match</span>');
+                return false;
+            }
+            if (newPassword.length < 8) {
+                $('#passval').after('<span class="text-danger">Password Length must be greater then 8 characters</span>');
+                return false;
+            }
+            if (!PasswordVerification(newPassword)) {
+                $('#passval').after('<span class="text-danger">User should enter complex alphanumeric password with one capital alphabet, one lower alphabet, one number, one symbol and must be 8 characters long.</span>');
+                return false;
+            }
+
+            return true;
+
+        }
+
+
+        //Set the URL.
+
+        //Getting User ID for Displaying userdetials on modal popup
+        $(document).on('click', '.getuid', function () {
+
+            Userid = null;
+            Userid = $(this).attr('id');
+
+            var postCall = $.get(GetSiteURL() + "/UserMasters/Edit", { "UserID": Userid });
+            postCall.done(function (data) {
+
+                $(".flyoutLeft").toggleClass("open1");
+                $(".flyoutLeft").find(".modal-body2").html(data);
+
+            }).fail(function () {
+                $('#newPassword').after('<span class="text-danger">An unexpected error occcurred while processing request!</span>');
+            });
+
+
+            return false;
+
+        });
+
+
+
+        function AjaxFormSubmit() {
+            if (Validate()) {
+                var confirmnewpassword = $("#confirmnewpassword").val();
+                var postCall = $.post(GetSiteURL() + "/UserMasters/GeneratePassword", { "UserID": Userid, "NewPassword": confirmnewpassword });
+
+                postCall.done(function (data) {
+                    if (data.Status == true) {
+                        $('#myModal').modal('hide');
+                        $('.modal-backdrop').remove();
+                        ShowMessage(data.Message, 'success');
+
+                    }
+                    else {
+
+                        $('#passval').after('<span class="text-danger">' + data.Message + '</span>');
+                    }
+                }).fail(function () {
+                    $('#newPassword').after('<span class="text-danger">An unexpected error occcurred while processing request!</span>');
+                });
+            }
+            else {
+                return false;
+            }
+        }
+        //Dismiss data on close popup
+        $('#myModal').on('hidden.bs.modal', function () {
+            $("#newPassword").val("");
+            $("#confirmnewpassword").val("");
+
+            // we want to trap the user closing the popup and we also set the cookie expiery here to seven days.
+
+        });
+
+
+
+        $(document).on('click', '.menuCol', function () {
+
+            $(".flyoutLeft").toggleClass("open1");
+
+            return false;
+        });
+
+        $(document).on('click', '.flyoutLeft .cross1', function () {
+            $(".flyoutLeft").removeClass("open1");
+            $("#reasonval").val("");
+            $("#reasonID").val("");
+            return false;
+        });
+        $(document).on('click', '.flyoutLeft .download', function () {
+            $("#reasonval").val("");
+            $("#reasonID").val("");
+            $(".flyoutLeft").removeClass("open1");
+            return true;
+        });
+
+        $(document).on('click', '.flyoutLeft .cancel', function () {
+            $(".flyoutLeft").removeClass("open1");
+            $("#reasonval").val("");
+            $("#reasonID").val("");
+            return false;
+        });
+
+
+        //Script for show hide password
+        const togglePassword = document.querySelector("#togglePassword");
+        const togglePassword2 = document.querySelector("#togglePassword2");
+        const password = document.querySelector("#newPassword");
+        const password2 = document.querySelector("#confirmnewpassword");
+
+        togglePassword.addEventListener("click", function () {
+            // toggle the type attribute
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+
+            // toggle the icon
+            $(this).toggleClass("fa-eye fa-eye-slash");
+        });
+        togglePassword2.addEventListener("click", function () {
+            // toggle the type attribute
+            const type = password2.getAttribute("type") === "password" ? "text" : "password";
+            password2.setAttribute("type", type);
+
+            // toggle the icon
+            $(this).toggleClass("fa-eye fa-eye-slash");
+        });
+    </script>
+
+
+
+}

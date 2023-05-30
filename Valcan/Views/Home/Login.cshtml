@@ -1,0 +1,139 @@
+﻿@model Valcan.Models.LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Login</title>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Template/favicon.ico" />
+
+    <!-- Vendor CSS Files -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="preload stylesheet" media="all" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link href="~/Template/css/fa.css" rel="preload stylesheet" media="all" as="style" />
+    <link href="~/Template/style.css" rel="preload stylesheet" media="all" as="style" />
+    <link href="~/Scripts/toastr.js/toastr.min.css" rel="stylesheet" />
+    <style type="text/css">
+        form i {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    @*<noscript>
+            <meta http-equiv="refresh" content="0;URL=https://localhost:44360/Home/NoScript" />
+        </noscript>*@
+    @Html.Partial("_Notification")
+    <!-- Mobile Menu -->
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close">
+                <span class="icofont-close js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header"></header>
+
+    <!-- main content -->
+    <main class="main_wrapper">
+        <section class="login-form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-md-8 col-lg-5">
+                        <div class="form-box">
+                            <aside><img src="~/Template/images/logo.png" class="img-fluid" alt="Logo" /></aside>
+                            <div class="title">
+                                <h1>Welcome to Vulcan!</h1>
+                                <p>Please sign-in to your account and get started</p>
+                            </div>
+                            @*<form class="login_form">
+                                    <div class="form-group">
+                                        <label>Email or Username</label>
+                                        <input type="text" class="form-control" id="" placeholder="Enter your email or username" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="grop-box">
+                                            <label>Password</label>
+                                            <a href="reset-password.html" class="link">Forgot password?</a>
+                                        </div>
+                                        <input type="password" class="form-control" id="" placeholder="• • • • • • • • •" required />
+                                    </div>
+                                    <div class="form-group form-check check-tc">
+                                        <label class="form-check-label" for="RememberMe">
+                                            <input type="checkbox" class="form-check-input" id="RememberMe" />
+                                            <span class="checkmark"></span> Remember Me
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="btn submit-btn">Sign in</button>
+                                </form>*@
+                            @using (Html.BeginForm("Login", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login_form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(m => m.EmailID, new { @class = "form-control", id = "email", placeholder = "Enter Email Address..." })
+                                    @Html.ValidationMessageFor(m => m.EmailID, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group">
+                                    @*<p>
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "password", placeholder = "Password" })
+                                            <i class="fa fa-eye-slash" id="togglePassword"></i>
+                                        </p>*@
+
+
+                                    <div style="display: flex;">
+                                        @Html.PasswordFor(model => model.Password, new { @class = "form-control valid", id = "password", placeholder = "Password" })
+                                        <span class="input-group-append">
+                                            <div class="input-group-text bg-transparent">
+                                                <i class="fa fa-eye-slash" id="togglePassword"></i>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <button type="submit" value="Login" class="btn submit-btn">Sign in</button>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="~/Template/js/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Template/js/custom.js"></script>
+
+    <script>
+        const togglePassword = document.querySelector("#togglePassword");
+        const password = document.querySelector("#password");
+
+        togglePassword.addEventListener("click", function () {
+            // toggle the type attribute
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+
+            // toggle the icon
+            $(this).toggleClass("fa-eye fa-eye-slash");
+        });
+    </script>
+</body>
+</html>

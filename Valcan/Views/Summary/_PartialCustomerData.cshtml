@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Valcan.Models.SummaryViewModel>
+
+<table id="dataTable2" class="display responsive nowrap" style="width: 100%; text-align: center;">
+    <thead>
+        <tr>
+            <th>
+                Key Manager
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Customer Code
+            </th>
+            <th>
+                Target 2023
+            </th>
+            <th>
+                Order Intake 2023
+            </th>
+            <th>
+                Sales 2022-23
+            </th>
+            <th>
+                Open Orders
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelitem => item.KEYMANAGER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Sold_to_party)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Sold_to_pt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Annual_sales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Incoming_orders)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Sales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Open_orders)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+    <script>
+
+
+        if (!$.fn.DataTable.isDataTable('#dataTable2')) {
+            $('#dataTable2').dataTable({
+                bSort: false,
+                dom: 'Bfplrti', //'Blfrtip',
+                sScrollX: true,
+                sScrollY: true,
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, 'All'],
+                ],
+                buttons: [{
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    autoFilter: true,
+                    sheetName: 'Exported data'
+                }]
+            });
+            $('#dataTable2').DataTable().columns.adjust();
+        }
+        $('body').find('.dataTables_scroll').wrap('<div id="scroll_div"></div>');
+        $('#scroll_div').doubleScroll();
+    </script>
+  
+

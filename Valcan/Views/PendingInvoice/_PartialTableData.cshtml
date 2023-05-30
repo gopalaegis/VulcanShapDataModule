@@ -1,0 +1,147 @@
+﻿@model IEnumerable<Valcan.Models.PendingInvoiceViewModel>
+
+<div>
+    <b>Total of Credit Amount: </b> <label id="lbltotal" style="color:red;"></label>
+</div>
+<br />
+<br />
+<table id="dataTable" class="display responsive nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KEYMANAGER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_Number_1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DocumentNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crcy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doc_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount_in_LC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day1)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KEYMANAGER)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer_Number_1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DocumentNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Crcy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.strDoc_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reference)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount_in_LC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day1)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script>
+
+
+    if (!$.fn.DataTable.isDataTable('#dataTable')) {
+        $('#dataTable').dataTable({
+            bSort: false,
+            dom: 'Bfplrti', //'Blfrtip',
+            sScrollX: true,
+            sScrollY: true,
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All'],
+            ],
+            buttons: [{
+                extend: 'excelHtml5',
+                text: 'Export to Excel',
+                autoFilter: true,
+                sheetName: 'Exported data'
+            }],
+            columnDefs: [
+                {
+                    targets: [9],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                },
+                {
+                    targets: [10],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                }
+            ],
+            footerCallback: function (row, data, start, end, display) {
+                debugger;
+                var api = this.api();
+
+                pageTotal = api
+                    .column(10, { search: 'applied' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return parseFloat(a) + parseFloat(b);
+                    }, 0);
+                var offerValTotal = addCommas(parseInt(pageTotal))
+                $("#lbltotal").html(offerValTotal);
+            }
+        });
+    }
+    $('body').find('.dataTables_scroll').wrap('<div id="scroll_div"></div>');
+    $('#scroll_div').doubleScroll();
+</script>
+
+

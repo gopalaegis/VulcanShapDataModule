@@ -1,0 +1,63 @@
+﻿@model DAL.UserMaster
+
+<div>
+  
+   
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("First Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Email ID")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailID)
+        </dd>
+
+        
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayName("Created On")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+       
+
+        @*<dd>
+            @Html.DisplayFor(model => model.LastModifiedBy)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayName("Last Modified On")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastModifiedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Is Active ?")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+    </dl>
+</div>
