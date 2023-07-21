@@ -93,25 +93,25 @@
                 }],
                 columnDefs: [
                     {
+                        targets: [09],
+                        render: function (data, type, row, meta) {
+                            return parseInt(data).toLocaleString('en-US');
+                        }
+                    },
+                    {
                         targets: [10],
                         render: function (data, type, row, meta) {
                             return parseInt(data).toLocaleString('en-US');
                         }
                     },
                     {
-                        targets: [11],
+                        targets: [13],
                         render: function (data, type, row, meta) {
                             return parseInt(data).toLocaleString('en-US');
                         }
                     },
                     {
                         targets: [14],
-                        render: function (data, type, row, meta) {
-                            return parseInt(data).toLocaleString('en-US');
-                        }
-                    },
-                    {
-                        targets: [15],
                         render: function (data, type, row, meta) {
                             return parseInt(data).toLocaleString('en-US');
                         }
@@ -136,7 +136,7 @@
 
                     // Total over this page
                     pageTotal = api
-                        .column(14, { search: 'applied' })
+                        .column(13, { search: 'applied' })
                         .data()
                         .reduce(function (a, b) {
                             return parseFloat(a) + parseFloat(b);
@@ -152,7 +152,7 @@
 
                     // Total over this page
                     pageTotal2 = api
-                        .column(15, { search: 'applied' })
+                        .column(14, { search: 'applied' })
                         .data()
                         .reduce(function (a, b) {
                             return parseFloat(a) + parseFloat(b);

@@ -36,7 +36,19 @@
           <Property Name="AGENT" Type="varchar" MaxLength="250" />
           <Property Name="TARGET" Type="varchar" MaxLength="250" />
           <Property Name="EMPLOYEE" Type="varchar" MaxLength="250" />
-          <Property Name="Cust_Code" Type="int" />
+        </EntityType>
+        <EntityType Name="KeyManagerMasters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KeyManager" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="KeyManager_Name" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="OfferMaster">
           <Key>
@@ -73,7 +85,6 @@
           <Property Name="Cust_Ind_C" Type="varchar" MaxLength="500" />
           <Property Name="Cust_Ind_D" Type="varchar" MaxLength="500" />
           <Property Name="OrdRs" Type="varchar" MaxLength="500" />
-          <Property Name="Cust_Code" Type="int" />
         </EntityType>
         <EntityType Name="OrderMaster">
           <Key>
@@ -188,6 +199,18 @@
           <Property Name="Day1" Type="varchar" MaxLength="500" />
           <Property Name="Disc1" Type="varchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="RoleMasters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Summary_Master">
           <Key>
             <PropertyRef Name="ID" />
@@ -240,31 +263,6 @@
           <Property Name="Product_hierarchy_3" Type="varchar" MaxLength="500" />
           <Property Name="Number_of_the_level_in_the_pro" Type="varchar" MaxLength="500" />
         </EntityType>
-        <EntityType Name="KeyManagerMasters">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="KeyManager" Type="nvarchar" MaxLength="100" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedOn" Type="datetime" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="KeyManager_Name" Type="varchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="RoleMasters">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar" MaxLength="100" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedOn" Type="datetime" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="UserInKeyManagerMasters">
           <Key>
             <PropertyRef Name="ID" />
@@ -274,8 +272,6 @@
           <Property Name="KeyManagerID" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="KeyManager" Type="nvarchar" MaxLength="200" />
-          <Property Name="KeyManager_Name" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="UserInRoleMasters">
           <Key>
@@ -362,25 +358,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="GetClientwiseSummaryData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin_vulcan2dev">
+        <Function Name="GetClientwiseSummaryData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="int" Mode="In" />
           <Parameter Name="fyStart" Type="datetime" Mode="In" />
           <Parameter Name="fyend" Type="datetime" Mode="In" />
           <Parameter Name="KAMId" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="GetSummaryData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin_vulcan2dev">
+        <Function Name="GetSummaryData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="int" Mode="In" />
           <Parameter Name="fyStart" Type="datetime" Mode="In" />
           <Parameter Name="fyend" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="admin_vulcan2devModelStoreContainer">
-          <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="admin_vulcan2dev" store:Type="Tables" />
-          <EntitySet Name="OfferMaster" EntityType="Self.OfferMaster" Schema="admin_vulcan2dev" store:Type="Tables" />
-          <EntitySet Name="OrderMaster" EntityType="Self.OrderMaster" Schema="admin_vulcan2dev" store:Type="Tables" />
-          <EntitySet Name="Pending_invoice_Master" EntityType="Self.Pending_invoice_Master" Schema="admin_vulcan2dev" store:Type="Tables" />
-          <EntitySet Name="Summary_Master" EntityType="Self.Summary_Master" Schema="admin_vulcan2dev" store:Type="Tables" />
+          <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KeyManagerMasters" EntityType="Self.KeyManagerMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfferMaster" EntityType="Self.OfferMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderMaster" EntityType="Self.OrderMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pending_invoice_Master" EntityType="Self.Pending_invoice_Master" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleMasters" EntityType="Self.RoleMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Summary_Master" EntityType="Self.Summary_Master" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInKeyManagerMasters" EntityType="Self.UserInKeyManagerMasters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInRoleMasters" EntityType="Self.UserInRoleMasters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMasters" EntityType="Self.UserMasters" Schema="dbo" store:Type="Tables" />
@@ -407,32 +403,32 @@
     <edmx:ConceptualModels>
       <Schema Namespace="admin_vulcan2devModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="admin_vulcan2devEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="CustomerMasters" EntityType="admin_vulcan2devModel.CustomerMaster" />
+          <EntitySet Name="KeyManagerMasters" EntityType="admin_vulcan2devModel.KeyManagerMaster" />
+          <EntitySet Name="OfferMasters" EntityType="admin_vulcan2devModel.OfferMaster" />
+          <EntitySet Name="OrderMasters" EntityType="admin_vulcan2devModel.OrderMaster" />
+          <EntitySet Name="Pending_invoice_Master" EntityType="admin_vulcan2devModel.Pending_invoice_Master" />
           <EntitySet Name="RoleMasters" EntityType="admin_vulcan2devModel.RoleMaster" />
+          <EntitySet Name="Summary_Master" EntityType="admin_vulcan2devModel.Summary_Master" />
+          <EntitySet Name="UserInKeyManagerMasters" EntityType="admin_vulcan2devModel.UserInKeyManagerMaster" />
           <EntitySet Name="UserInRoleMasters" EntityType="admin_vulcan2devModel.UserInRoleMaster" />
           <EntitySet Name="UserMasters" EntityType="admin_vulcan2devModel.UserMaster" />
+          <EntitySet Name="UserPasswordHistories" EntityType="admin_vulcan2devModel.UserPasswordHistory" />
+          <AssociationSet Name="FK_UserInKeyManagerMasters_KeyManagerMasters" Association="admin_vulcan2devModel.FK_UserInKeyManagerMasters_KeyManagerMasters">
+            <End Role="KeyManagerMaster" EntitySet="KeyManagerMasters" />
+            <End Role="UserInKeyManagerMaster" EntitySet="UserInKeyManagerMasters" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserInRoleMasters_RoleMasters" Association="admin_vulcan2devModel.FK_UserInRoleMasters_RoleMasters">
             <End Role="RoleMaster" EntitySet="RoleMasters" />
             <End Role="UserInRoleMaster" EntitySet="UserInRoleMasters" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserInRoleMasters_UserMasters" Association="admin_vulcan2devModel.FK_UserInRoleMasters_UserMasters">
-            <End Role="UserMaster" EntitySet="UserMasters" />
-            <End Role="UserInRoleMaster" EntitySet="UserInRoleMasters" />
-          </AssociationSet>
-          <EntitySet Name="UserPasswordHistories" EntityType="admin_vulcan2devModel.UserPasswordHistory" />
-          <EntitySet Name="UserInKeyManagerMasters" EntityType="admin_vulcan2devModel.UserInKeyManagerMaster" />
           <AssociationSet Name="FK_UserInKeyManagerMasters_UserMasters" Association="admin_vulcan2devModel.FK_UserInKeyManagerMasters_UserMasters">
             <End Role="UserMaster" EntitySet="UserMasters" />
             <End Role="UserInKeyManagerMaster" EntitySet="UserInKeyManagerMasters" />
           </AssociationSet>
-          <EntitySet Name="CustomerMasters" EntityType="admin_vulcan2devModel.CustomerMaster" />
-          <EntitySet Name="OfferMasters" EntityType="admin_vulcan2devModel.OfferMaster" />
-          <EntitySet Name="Pending_invoice_Master" EntityType="admin_vulcan2devModel.Pending_invoice_Master" />
-          <EntitySet Name="Summary_Master" EntityType="admin_vulcan2devModel.Summary_Master" />
-          <EntitySet Name="OrderMasters" EntityType="admin_vulcan2devModel.OrderMaster" />
-          <EntitySet Name="KeyManagerMasters" EntityType="admin_vulcan2devModel.KeyManagerMaster" />
-          <AssociationSet Name="FK_UserInKeyManagerMasters_KeyManagerMasters" Association="admin_vulcan2devModel.FK_UserInKeyManagerMasters_KeyManagerMasters">
-            <End Role="KeyManagerMaster" EntitySet="KeyManagerMasters" />
-            <End Role="UserInKeyManagerMaster" EntitySet="UserInKeyManagerMasters" />
+          <AssociationSet Name="FK_UserInRoleMasters_UserMasters" Association="admin_vulcan2devModel.FK_UserInRoleMasters_UserMasters">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="UserInRoleMaster" EntitySet="UserInRoleMasters" />
           </AssociationSet>
           <FunctionImport Name="GetClientwiseSummaryData" ReturnType="Collection(admin_vulcan2devModel.GetClientwiseSummaryData_Result)">
             <Parameter Name="userId" Mode="In" Type="Int32" />
@@ -446,110 +442,6 @@
             <Parameter Name="fyend" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
-        <EntityType Name="RoleMaster">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="UserInRoleMasters" Relationship="admin_vulcan2devModel.FK_UserInRoleMasters_RoleMasters" FromRole="RoleMaster" ToRole="UserInRoleMaster" />
-        </EntityType>
-        <EntityType Name="UserInRoleMaster">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="RoleMaster" Relationship="admin_vulcan2devModel.FK_UserInRoleMasters_RoleMasters" FromRole="UserInRoleMaster" ToRole="RoleMaster" />
-          <NavigationProperty Name="UserMaster" Relationship="admin_vulcan2devModel.FK_UserInRoleMasters_UserMasters" FromRole="UserInRoleMaster" ToRole="UserMaster" />
-        </EntityType>
-        <EntityType Name="UserMaster">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EmailID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ChangePasswordInterval" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="IsFirstLogin" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="UserInRoleMasters" Relationship="admin_vulcan2devModel.FK_UserInRoleMasters_UserMasters" FromRole="UserMaster" ToRole="UserInRoleMaster" />
-          <NavigationProperty Name="UserInKeyManagerMasters" Relationship="admin_vulcan2devModel.FK_UserInKeyManagerMasters_UserMasters" FromRole="UserMaster" ToRole="UserInKeyManagerMaster" />
-        </EntityType>
-        <Association Name="FK_UserInRoleMasters_RoleMasters">
-          <End Type="admin_vulcan2devModel.RoleMaster" Role="RoleMaster" Multiplicity="1" />
-          <End Type="admin_vulcan2devModel.UserInRoleMaster" Role="UserInRoleMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RoleMaster">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserInRoleMaster">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserInRoleMasters_UserMasters">
-          <End Type="admin_vulcan2devModel.UserMaster" Role="UserMaster" Multiplicity="1" />
-          <End Type="admin_vulcan2devModel.UserInRoleMaster" Role="UserInRoleMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserMaster">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserInRoleMaster">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="UserPasswordHistory">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="UserInKeyManagerMaster">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="KeyManagerID" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="UserMaster" Relationship="admin_vulcan2devModel.FK_UserInKeyManagerMasters_UserMasters" FromRole="UserInKeyManagerMaster" ToRole="UserMaster" />
-          <NavigationProperty Name="KeyManagerMaster" Relationship="admin_vulcan2devModel.FK_UserInKeyManagerMasters_KeyManagerMasters" FromRole="UserInKeyManagerMaster" ToRole="KeyManagerMaster" />
-          <Property Name="KeyManager" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="KeyManager_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK_UserInKeyManagerMasters_UserMasters">
-          <End Type="admin_vulcan2devModel.UserMaster" Role="UserMaster" Multiplicity="1" />
-          <End Type="admin_vulcan2devModel.UserInKeyManagerMaster" Role="UserInKeyManagerMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserMaster">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserInKeyManagerMaster">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CustomerMaster">
           <Key>
             <PropertyRef Name="Cust_Id" />
@@ -581,7 +473,20 @@
           <Property Name="AGENT" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="TARGET" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="EMPLOYEE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Cust_Code" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KeyManagerMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KeyManager" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="KeyManager_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserInKeyManagerMasters" Relationship="admin_vulcan2devModel.FK_UserInKeyManagerMasters_KeyManagerMasters" FromRole="KeyManagerMaster" ToRole="UserInKeyManagerMaster" />
         </EntityType>
         <EntityType Name="OfferMaster">
           <Key>
@@ -618,104 +523,6 @@
           <Property Name="Cust_Ind_C" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Cust_Ind_D" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="OrdRs" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Cust_Code" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Pending_invoice_Master">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CoCd" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Customer" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Assignment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Year" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="DocumentNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Pstng_Date" Type="DateTime" Precision="3" />
-          <Property Name="Doc_Date" Type="DateTime" Precision="3" />
-          <Property Name="Reference" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Doc_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Period" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="D_C" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Amount_in_LC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Amount_in_LC1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Bline_Date" Type="DateTime" Precision="3" />
-          <Property Name="PayT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Sales_Doc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Item" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Payment_reference" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Plan_group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="G_L_Acct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Customer_Number_1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Document_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Debit_Credit_Indicator" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Itm" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Recon_acct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Group1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Cl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Customer_classification" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Customer_Account_Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Pers_No" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Planning_group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Last_name_First_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Crcy" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Amount" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Amount1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Day1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Disc1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Summary_Master">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Dv" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Division" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Sold_to_pt" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Sold_to_party" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Material" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Material_Number" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Product_hierarchy" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Pers_No" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Last_name_First_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Group_1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Customer_Account_Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Cl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Customer_classification" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="Indus" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Industry_key" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Matl_Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Product_hierarchy_2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Plan_group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Material_Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Material_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Annual_sales" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Annual_sales_cur" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Incoming_orders" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Incoming_orders_cur" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Incoming_orders_quantity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Incoming_orders_quantity_unit" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Sales" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Sales_cur" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Invoiced_Quantity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Invoiced_Quantity_unit" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Open_orders" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Open_orders_cur" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Open_orders_quantity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Open_orders_quantity_unit" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Region_State_Province_Count" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Country_Key" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Ind_Code_1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Ind_code_2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Ind_code_3" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="MRPC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="MRP_Controller_Materials_Plan" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Product_hierarchy_3" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Number_of_the_level_in_the_pro" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OrderMaster">
           <Key>
@@ -785,19 +592,168 @@
           <Property Name="ConvFactor" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
           <Property Name="Mat_Group" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="KeyManagerMaster">
+        <EntityType Name="Pending_invoice_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CoCd" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Customer" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Assignment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DocumentNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pstng_Date" Type="DateTime" Precision="3" />
+          <Property Name="Doc_Date" Type="DateTime" Precision="3" />
+          <Property Name="Reference" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Doc_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Period" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="D_C" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Amount_in_LC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Amount_in_LC1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Bline_Date" Type="DateTime" Precision="3" />
+          <Property Name="PayT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Sales_Doc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Item" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Payment_reference" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Plan_group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="G_L_Acct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Customer_Number_1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Document_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Debit_Credit_Indicator" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Itm" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Recon_acct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Group1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Cl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Customer_classification" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Customer_Account_Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pers_No" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Planning_group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Last_name_First_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Crcy" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Amount1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Day1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Disc1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="KeyManager" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="KeyManager_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="UserInKeyManagerMasters" Relationship="admin_vulcan2devModel.FK_UserInKeyManagerMasters_KeyManagerMasters" FromRole="KeyManagerMaster" ToRole="UserInKeyManagerMaster" />
+          <NavigationProperty Name="UserInRoleMasters" Relationship="admin_vulcan2devModel.FK_UserInRoleMasters_RoleMasters" FromRole="RoleMaster" ToRole="UserInRoleMaster" />
+        </EntityType>
+        <EntityType Name="Summary_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dv" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Division" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Sold_to_pt" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Sold_to_party" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Material" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Material_Number" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Product_hierarchy" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pers_No" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Last_name_First_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Group_1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Customer_Account_Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Cl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Customer_classification" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Indus" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Industry_key" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Matl_Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Product_hierarchy_2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Plan_group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Material_Group" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Material_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Annual_sales" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Annual_sales_cur" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Incoming_orders" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Incoming_orders_cur" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Incoming_orders_quantity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Incoming_orders_quantity_unit" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Sales" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Sales_cur" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Invoiced_Quantity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Invoiced_Quantity_unit" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Open_orders" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Open_orders_cur" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Open_orders_quantity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Open_orders_quantity_unit" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Region_State_Province_Count" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Country_Key" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Ind_Code_1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Ind_code_2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Ind_code_3" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MRPC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MRP_Controller_Materials_Plan" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Product_hierarchy_3" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Number_of_the_level_in_the_pro" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserInKeyManagerMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="KeyManagerID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="KeyManagerMaster" Relationship="admin_vulcan2devModel.FK_UserInKeyManagerMasters_KeyManagerMasters" FromRole="UserInKeyManagerMaster" ToRole="KeyManagerMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="admin_vulcan2devModel.FK_UserInKeyManagerMasters_UserMasters" FromRole="UserInKeyManagerMaster" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="UserInRoleMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RoleMaster" Relationship="admin_vulcan2devModel.FK_UserInRoleMasters_RoleMasters" FromRole="UserInRoleMaster" ToRole="RoleMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="admin_vulcan2devModel.FK_UserInRoleMasters_UserMasters" FromRole="UserInRoleMaster" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChangePasswordInterval" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsFirstLogin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserInKeyManagerMasters" Relationship="admin_vulcan2devModel.FK_UserInKeyManagerMasters_UserMasters" FromRole="UserMaster" ToRole="UserInKeyManagerMaster" />
+          <NavigationProperty Name="UserInRoleMasters" Relationship="admin_vulcan2devModel.FK_UserInRoleMasters_UserMasters" FromRole="UserMaster" ToRole="UserInRoleMaster" />
+        </EntityType>
+        <EntityType Name="UserPasswordHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_UserInKeyManagerMasters_KeyManagerMasters">
           <End Type="admin_vulcan2devModel.KeyManagerMaster" Role="KeyManagerMaster" Multiplicity="1" />
@@ -811,14 +767,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserInRoleMasters_RoleMasters">
+          <End Type="admin_vulcan2devModel.RoleMaster" Role="RoleMaster" Multiplicity="1" />
+          <End Type="admin_vulcan2devModel.UserInRoleMaster" Role="UserInRoleMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserInRoleMaster">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInKeyManagerMasters_UserMasters">
+          <End Type="admin_vulcan2devModel.UserMaster" Role="UserMaster" Multiplicity="1" />
+          <End Type="admin_vulcan2devModel.UserInKeyManagerMaster" Role="UserInKeyManagerMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserInKeyManagerMaster">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInRoleMasters_UserMasters">
+          <End Type="admin_vulcan2devModel.UserMaster" Role="UserMaster" Multiplicity="1" />
+          <End Type="admin_vulcan2devModel.UserInRoleMaster" Role="UserInRoleMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserInRoleMaster">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <ComplexType Name="GetClientwiseSummaryData_Result">
           <Property Type="Decimal" Name="sales" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="Open_orders" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="OrderIntake" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Annual_sales" Nullable="true" Precision="38" Scale="6" />
           <Property Type="String" Name="Sold_to_party" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="KEYMANAGER" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Sold_to_pt" Nullable="true" MaxLength="500" />
-          <Property Type="Decimal" Name="Annual_sales" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
         <ComplexType Name="GetSummaryData_Result">
           <Property Type="Decimal" Name="sales" Nullable="true" Precision="38" Scale="2" />
@@ -833,76 +825,9 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="admin_vulcan2devModelStoreContainer" CdmEntityContainer="admin_vulcan2devEntities" >
-          <EntitySetMapping Name="RoleMasters">
-            <EntityTypeMapping TypeName="admin_vulcan2devModel.RoleMaster">
-              <MappingFragment StoreEntitySet="RoleMasters">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserInRoleMasters">
-            <EntityTypeMapping TypeName="admin_vulcan2devModel.UserInRoleMaster">
-              <MappingFragment StoreEntitySet="UserInRoleMasters">
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserMasters">
-            <EntityTypeMapping TypeName="admin_vulcan2devModel.UserMaster">
-              <MappingFragment StoreEntitySet="UserMasters">
-                <ScalarProperty Name="IsFirstLogin" ColumnName="IsFirstLogin" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ChangePasswordInterval" ColumnName="ChangePasswordInterval" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserPasswordHistories">
-            <EntityTypeMapping TypeName="admin_vulcan2devModel.UserPasswordHistory">
-              <MappingFragment StoreEntitySet="UserPasswordHistories">
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserInKeyManagerMasters">
-            <EntityTypeMapping TypeName="admin_vulcan2devModel.UserInKeyManagerMaster">
-              <MappingFragment StoreEntitySet="UserInKeyManagerMasters">
-                <ScalarProperty Name="KeyManager_Name" ColumnName="KeyManager_Name" />
-                <ScalarProperty Name="KeyManager" ColumnName="KeyManager" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="KeyManagerID" ColumnName="KeyManagerID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CustomerMasters">
             <EntityTypeMapping TypeName="admin_vulcan2devModel.CustomerMaster">
               <MappingFragment StoreEntitySet="CustomerMaster">
-                <ScalarProperty Name="Cust_Code" ColumnName="Cust_Code" />
                 <ScalarProperty Name="EMPLOYEE" ColumnName="EMPLOYEE" />
                 <ScalarProperty Name="TARGET" ColumnName="TARGET" />
                 <ScalarProperty Name="AGENT" ColumnName="AGENT" />
@@ -933,10 +858,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="KeyManagerMasters">
+            <EntityTypeMapping TypeName="admin_vulcan2devModel.KeyManagerMaster">
+              <MappingFragment StoreEntitySet="KeyManagerMasters">
+                <ScalarProperty Name="KeyManager_Name" ColumnName="KeyManager_Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="KeyManager" ColumnName="KeyManager" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="OfferMasters">
             <EntityTypeMapping TypeName="admin_vulcan2devModel.OfferMaster">
               <MappingFragment StoreEntitySet="OfferMaster">
-                <ScalarProperty Name="Cust_Code" ColumnName="Cust_Code" />
                 <ScalarProperty Name="OrdRs" ColumnName="OrdRs" />
                 <ScalarProperty Name="Cust_Ind_D" ColumnName="Cust_Ind_D" />
                 <ScalarProperty Name="Cust_Ind_C" ColumnName="Cust_Ind_C" />
@@ -968,105 +906,6 @@
                 <ScalarProperty Name="SaTy" ColumnName="SaTy" />
                 <ScalarProperty Name="Dv" ColumnName="Dv" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pending_invoice_Master">
-            <EntityTypeMapping TypeName="admin_vulcan2devModel.Pending_invoice_Master">
-              <MappingFragment StoreEntitySet="Pending_invoice_Master">
-                <ScalarProperty Name="Disc1" ColumnName="Disc1" />
-                <ScalarProperty Name="Day1" ColumnName="Day1" />
-                <ScalarProperty Name="Amount1" ColumnName="Amount1" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Crcy" ColumnName="Crcy" />
-                <ScalarProperty Name="Last_name_First_name" ColumnName="Last_name_First_name" />
-                <ScalarProperty Name="Planning_group" ColumnName="Planning_group" />
-                <ScalarProperty Name="Pers_No" ColumnName="Pers_No" />
-                <ScalarProperty Name="Customer_Account_Group" ColumnName="Customer_Account_Group" />
-                <ScalarProperty Name="Customer_classification" ColumnName="Customer_classification" />
-                <ScalarProperty Name="Cl" ColumnName="Cl" />
-                <ScalarProperty Name="Group1" ColumnName="Group1" />
-                <ScalarProperty Name="Recon_acct" ColumnName="Recon_acct" />
-                <ScalarProperty Name="Itm" ColumnName="Itm" />
-                <ScalarProperty Name="Debit_Credit_Indicator" ColumnName="Debit_Credit_Indicator" />
-                <ScalarProperty Name="Document_Type" ColumnName="Document_Type" />
-                <ScalarProperty Name="Customer_Number_1" ColumnName="Customer_Number_1" />
-                <ScalarProperty Name="G_L_Acct" ColumnName="G_L_Acct" />
-                <ScalarProperty Name="Plan_group" ColumnName="Plan_group" />
-                <ScalarProperty Name="Group" ColumnName="Group" />
-                <ScalarProperty Name="Payment_reference" ColumnName="Payment_reference" />
-                <ScalarProperty Name="Item" ColumnName="Item" />
-                <ScalarProperty Name="Sales_Doc" ColumnName="Sales_Doc" />
-                <ScalarProperty Name="PayT" ColumnName="PayT" />
-                <ScalarProperty Name="Bline_Date" ColumnName="Bline_Date" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Amount_in_LC1" ColumnName="Amount_in_LC1" />
-                <ScalarProperty Name="Amount_in_LC" ColumnName="Amount_in_LC" />
-                <ScalarProperty Name="D_C" ColumnName="D_C" />
-                <ScalarProperty Name="Period" ColumnName="Period" />
-                <ScalarProperty Name="Doc_Type" ColumnName="Doc_Type" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="Doc_Date" ColumnName="Doc_Date" />
-                <ScalarProperty Name="Pstng_Date" ColumnName="Pstng_Date" />
-                <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Assignment" ColumnName="Assignment" />
-                <ScalarProperty Name="Customer" ColumnName="Customer" />
-                <ScalarProperty Name="CoCd" ColumnName="CoCd" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Summary_Master">
-            <EntityTypeMapping TypeName="admin_vulcan2devModel.Summary_Master">
-              <MappingFragment StoreEntitySet="Summary_Master">
-                <ScalarProperty Name="Number_of_the_level_in_the_pro" ColumnName="Number_of_the_level_in_the_pro" />
-                <ScalarProperty Name="Product_hierarchy_3" ColumnName="Product_hierarchy_3" />
-                <ScalarProperty Name="MRP_Controller_Materials_Plan" ColumnName="MRP_Controller_Materials_Plan" />
-                <ScalarProperty Name="MRPC" ColumnName="MRPC" />
-                <ScalarProperty Name="Ind_code_3" ColumnName="Ind_code_3" />
-                <ScalarProperty Name="Ind_code_2" ColumnName="Ind_code_2" />
-                <ScalarProperty Name="Ind_Code_1" ColumnName="Ind_Code_1" />
-                <ScalarProperty Name="Country_Key" ColumnName="Country_Key" />
-                <ScalarProperty Name="Region_State_Province_Count" ColumnName="Region_State_Province_Count" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Open_orders_quantity_unit" ColumnName="Open_orders_quantity_unit" />
-                <ScalarProperty Name="Open_orders_quantity" ColumnName="Open_orders_quantity" />
-                <ScalarProperty Name="Open_orders_cur" ColumnName="Open_orders_cur" />
-                <ScalarProperty Name="Open_orders" ColumnName="Open_orders" />
-                <ScalarProperty Name="Invoiced_Quantity_unit" ColumnName="Invoiced_Quantity_unit" />
-                <ScalarProperty Name="Invoiced_Quantity" ColumnName="Invoiced_Quantity" />
-                <ScalarProperty Name="Sales_cur" ColumnName="Sales_cur" />
-                <ScalarProperty Name="Sales" ColumnName="Sales" />
-                <ScalarProperty Name="Incoming_orders_quantity_unit" ColumnName="Incoming_orders_quantity_unit" />
-                <ScalarProperty Name="Incoming_orders_quantity" ColumnName="Incoming_orders_quantity" />
-                <ScalarProperty Name="Incoming_orders_cur" ColumnName="Incoming_orders_cur" />
-                <ScalarProperty Name="Incoming_orders" ColumnName="Incoming_orders" />
-                <ScalarProperty Name="Annual_sales_cur" ColumnName="Annual_sales_cur" />
-                <ScalarProperty Name="Annual_sales" ColumnName="Annual_sales" />
-                <ScalarProperty Name="Material_Type" ColumnName="Material_Type" />
-                <ScalarProperty Name="Material_Group" ColumnName="Material_Group" />
-                <ScalarProperty Name="Plan_group" ColumnName="Plan_group" />
-                <ScalarProperty Name="Product_hierarchy_2" ColumnName="Product_hierarchy_2" />
-                <ScalarProperty Name="Matl_Group" ColumnName="Matl_Group" />
-                <ScalarProperty Name="Industry_key" ColumnName="Industry_key" />
-                <ScalarProperty Name="Indus" ColumnName="Indus" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Customer_classification" ColumnName="Customer_classification" />
-                <ScalarProperty Name="Cl" ColumnName="Cl" />
-                <ScalarProperty Name="Customer_Account_Group" ColumnName="Customer_Account_Group" />
-                <ScalarProperty Name="Group_1" ColumnName="Group_1" />
-                <ScalarProperty Name="Group" ColumnName="Group" />
-                <ScalarProperty Name="Last_name_First_name" ColumnName="Last_name_First_name" />
-                <ScalarProperty Name="Pers_No" ColumnName="Pers_No" />
-                <ScalarProperty Name="Product_hierarchy" ColumnName="Product_hierarchy" />
-                <ScalarProperty Name="Material_Number" ColumnName="Material_Number" />
-                <ScalarProperty Name="Material" ColumnName="Material" />
-                <ScalarProperty Name="Sold_to_party" ColumnName="Sold_to_party" />
-                <ScalarProperty Name="Sold_to_pt" ColumnName="Sold_to_pt" />
-                <ScalarProperty Name="Division" ColumnName="Division" />
-                <ScalarProperty Name="Dv" ColumnName="Dv" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1139,16 +978,165 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="KeyManagerMasters">
-            <EntityTypeMapping TypeName="admin_vulcan2devModel.KeyManagerMaster">
-              <MappingFragment StoreEntitySet="KeyManagerMasters">
-                <ScalarProperty Name="KeyManager_Name" ColumnName="KeyManager_Name" />
+          <EntitySetMapping Name="Pending_invoice_Master">
+            <EntityTypeMapping TypeName="admin_vulcan2devModel.Pending_invoice_Master">
+              <MappingFragment StoreEntitySet="Pending_invoice_Master">
+                <ScalarProperty Name="Disc1" ColumnName="Disc1" />
+                <ScalarProperty Name="Day1" ColumnName="Day1" />
+                <ScalarProperty Name="Amount1" ColumnName="Amount1" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Crcy" ColumnName="Crcy" />
+                <ScalarProperty Name="Last_name_First_name" ColumnName="Last_name_First_name" />
+                <ScalarProperty Name="Planning_group" ColumnName="Planning_group" />
+                <ScalarProperty Name="Pers_No" ColumnName="Pers_No" />
+                <ScalarProperty Name="Customer_Account_Group" ColumnName="Customer_Account_Group" />
+                <ScalarProperty Name="Customer_classification" ColumnName="Customer_classification" />
+                <ScalarProperty Name="Cl" ColumnName="Cl" />
+                <ScalarProperty Name="Group1" ColumnName="Group1" />
+                <ScalarProperty Name="Recon_acct" ColumnName="Recon_acct" />
+                <ScalarProperty Name="Itm" ColumnName="Itm" />
+                <ScalarProperty Name="Debit_Credit_Indicator" ColumnName="Debit_Credit_Indicator" />
+                <ScalarProperty Name="Document_Type" ColumnName="Document_Type" />
+                <ScalarProperty Name="Customer_Number_1" ColumnName="Customer_Number_1" />
+                <ScalarProperty Name="G_L_Acct" ColumnName="G_L_Acct" />
+                <ScalarProperty Name="Plan_group" ColumnName="Plan_group" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Payment_reference" ColumnName="Payment_reference" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="Sales_Doc" ColumnName="Sales_Doc" />
+                <ScalarProperty Name="PayT" ColumnName="PayT" />
+                <ScalarProperty Name="Bline_Date" ColumnName="Bline_Date" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Amount_in_LC1" ColumnName="Amount_in_LC1" />
+                <ScalarProperty Name="Amount_in_LC" ColumnName="Amount_in_LC" />
+                <ScalarProperty Name="D_C" ColumnName="D_C" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="Doc_Type" ColumnName="Doc_Type" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Doc_Date" ColumnName="Doc_Date" />
+                <ScalarProperty Name="Pstng_Date" ColumnName="Pstng_Date" />
+                <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Assignment" ColumnName="Assignment" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="CoCd" ColumnName="CoCd" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleMasters">
+            <EntityTypeMapping TypeName="admin_vulcan2devModel.RoleMaster">
+              <MappingFragment StoreEntitySet="RoleMasters">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="KeyManager" ColumnName="KeyManager" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Summary_Master">
+            <EntityTypeMapping TypeName="admin_vulcan2devModel.Summary_Master">
+              <MappingFragment StoreEntitySet="Summary_Master">
+                <ScalarProperty Name="Number_of_the_level_in_the_pro" ColumnName="Number_of_the_level_in_the_pro" />
+                <ScalarProperty Name="Product_hierarchy_3" ColumnName="Product_hierarchy_3" />
+                <ScalarProperty Name="MRP_Controller_Materials_Plan" ColumnName="MRP_Controller_Materials_Plan" />
+                <ScalarProperty Name="MRPC" ColumnName="MRPC" />
+                <ScalarProperty Name="Ind_code_3" ColumnName="Ind_code_3" />
+                <ScalarProperty Name="Ind_code_2" ColumnName="Ind_code_2" />
+                <ScalarProperty Name="Ind_Code_1" ColumnName="Ind_Code_1" />
+                <ScalarProperty Name="Country_Key" ColumnName="Country_Key" />
+                <ScalarProperty Name="Region_State_Province_Count" ColumnName="Region_State_Province_Count" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Open_orders_quantity_unit" ColumnName="Open_orders_quantity_unit" />
+                <ScalarProperty Name="Open_orders_quantity" ColumnName="Open_orders_quantity" />
+                <ScalarProperty Name="Open_orders_cur" ColumnName="Open_orders_cur" />
+                <ScalarProperty Name="Open_orders" ColumnName="Open_orders" />
+                <ScalarProperty Name="Invoiced_Quantity_unit" ColumnName="Invoiced_Quantity_unit" />
+                <ScalarProperty Name="Invoiced_Quantity" ColumnName="Invoiced_Quantity" />
+                <ScalarProperty Name="Sales_cur" ColumnName="Sales_cur" />
+                <ScalarProperty Name="Sales" ColumnName="Sales" />
+                <ScalarProperty Name="Incoming_orders_quantity_unit" ColumnName="Incoming_orders_quantity_unit" />
+                <ScalarProperty Name="Incoming_orders_quantity" ColumnName="Incoming_orders_quantity" />
+                <ScalarProperty Name="Incoming_orders_cur" ColumnName="Incoming_orders_cur" />
+                <ScalarProperty Name="Incoming_orders" ColumnName="Incoming_orders" />
+                <ScalarProperty Name="Annual_sales_cur" ColumnName="Annual_sales_cur" />
+                <ScalarProperty Name="Annual_sales" ColumnName="Annual_sales" />
+                <ScalarProperty Name="Material_Type" ColumnName="Material_Type" />
+                <ScalarProperty Name="Material_Group" ColumnName="Material_Group" />
+                <ScalarProperty Name="Plan_group" ColumnName="Plan_group" />
+                <ScalarProperty Name="Product_hierarchy_2" ColumnName="Product_hierarchy_2" />
+                <ScalarProperty Name="Matl_Group" ColumnName="Matl_Group" />
+                <ScalarProperty Name="Industry_key" ColumnName="Industry_key" />
+                <ScalarProperty Name="Indus" ColumnName="Indus" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Customer_classification" ColumnName="Customer_classification" />
+                <ScalarProperty Name="Cl" ColumnName="Cl" />
+                <ScalarProperty Name="Customer_Account_Group" ColumnName="Customer_Account_Group" />
+                <ScalarProperty Name="Group_1" ColumnName="Group_1" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Last_name_First_name" ColumnName="Last_name_First_name" />
+                <ScalarProperty Name="Pers_No" ColumnName="Pers_No" />
+                <ScalarProperty Name="Product_hierarchy" ColumnName="Product_hierarchy" />
+                <ScalarProperty Name="Material_Number" ColumnName="Material_Number" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="Sold_to_party" ColumnName="Sold_to_party" />
+                <ScalarProperty Name="Sold_to_pt" ColumnName="Sold_to_pt" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Dv" ColumnName="Dv" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInKeyManagerMasters">
+            <EntityTypeMapping TypeName="admin_vulcan2devModel.UserInKeyManagerMaster">
+              <MappingFragment StoreEntitySet="UserInKeyManagerMasters">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="KeyManagerID" ColumnName="KeyManagerID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInRoleMasters">
+            <EntityTypeMapping TypeName="admin_vulcan2devModel.UserInRoleMaster">
+              <MappingFragment StoreEntitySet="UserInRoleMasters">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="admin_vulcan2devModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMasters">
+                <ScalarProperty Name="IsFirstLogin" ColumnName="IsFirstLogin" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ChangePasswordInterval" ColumnName="ChangePasswordInterval" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPasswordHistories">
+            <EntityTypeMapping TypeName="admin_vulcan2devModel.UserPasswordHistory">
+              <MappingFragment StoreEntitySet="UserPasswordHistories">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1159,10 +1147,10 @@
                 <ScalarProperty Name="sales" ColumnName="sales" />
                 <ScalarProperty Name="Open_orders" ColumnName="Open_orders" />
                 <ScalarProperty Name="OrderIntake" ColumnName="OrderIntake" />
+                <ScalarProperty Name="Annual_sales" ColumnName="Annual_sales" />
                 <ScalarProperty Name="Sold_to_party" ColumnName="Sold_to_party" />
                 <ScalarProperty Name="KEYMANAGER" ColumnName="KEYMANAGER" />
                 <ScalarProperty Name="Sold_to_pt" ColumnName="Sold_to_pt" />
-                <ScalarProperty Name="Annual_sales" ColumnName="Annual_sales" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -100,7 +100,7 @@ namespace Valcan.Controllers
                 ViewBag.UploadStatus = "Excel not uploaded successfully. please check log for more details.";
             }
 
-            return View("UploadFiles");
+            return Json(ViewBag.UploadStatus, JsonRequestBehavior.AllowGet);
         }
         public bool ImportExceltoDatabase(string strFilePath)
         {

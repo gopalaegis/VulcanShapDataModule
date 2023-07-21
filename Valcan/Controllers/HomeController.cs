@@ -40,7 +40,7 @@ namespace Valcan.Controllers
 
         public ActionResult Login(string returnUrl)
         {
-            logger.Error("Login");
+            
             ViewBag.ReturnUrl = returnUrl;
             Session.Clear();
             Session.Abandon();
@@ -53,10 +53,12 @@ namespace Valcan.Controllers
         {
             try
             {
+                logger.Error("Current time is: " + DateTime.Now);
                 if (ModelState.IsValid)
                 {
                     CommonMethod cm = new CommonMethod();
                     model.Password = cm.EncryptData(model.Password, Key);
+                    var a = cm.DecryptData("qyIxscsHmmSioOjZLY2BCQ==", Key);
 
                     var IsValidUser = db.UserMasters
                   .Where(u => u.EmailID.ToLower() == model.EmailID.ToLower() && u.Password == model.Password && u.IsActive == true).SingleOrDefault();

@@ -61,6 +61,7 @@ namespace Valcan.Controllers
                     order.PayT = item.PayT;
                     order.DocumentNo = item.DocumentNo;
                     order.Text = item.Text;
+                    order.Crcy = item.Crcy;
                     order.Doc_Date = item.Doc_Date;
                     order.strDoc_Date = item.Doc_Date.HasValue ? item.Doc_Date.Value.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture) : string.Empty;
                     order.Reference = item.Reference;
@@ -246,6 +247,7 @@ namespace Valcan.Controllers
                     order.PayT = item.PayT;
                     order.DocumentNo = item.DocumentNo;
                     order.Text = item.Text;
+                    order.Crcy = item.Crcy;
                     order.Doc_Date = item.Doc_Date;
                     order.strDoc_Date = item.Doc_Date.HasValue ? item.Doc_Date.Value.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture) : string.Empty;
                     order.Reference = item.Reference;

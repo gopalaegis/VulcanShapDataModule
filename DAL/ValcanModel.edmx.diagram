@@ -5,21 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2a6f7f2ae90b45dda030bc7b66cffbbe" Name="Diagram1" ZoomLevel="82" >
-        <EntityTypeShape EntityType="admin_vulcan2devModel.RoleMaster" Width="1.5" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="admin_vulcan2devModel.UserInRoleMaster" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="admin_vulcan2devModel.UserMaster" Width="1.5" PointX="0.75" PointY="6.5" />
-        <AssociationConnector Association="admin_vulcan2devModel.FK_UserInRoleMasters_RoleMasters" />
-        <AssociationConnector Association="admin_vulcan2devModel.FK_UserInRoleMasters_UserMasters" />
-        <EntityTypeShape EntityType="admin_vulcan2devModel.UserPasswordHistory" Width="1.5" PointX="3.375" PointY="4.75" />
-        <EntityTypeShape EntityType="admin_vulcan2devModel.UserInKeyManagerMaster" Width="1.5" PointX="3" PointY="8.125" />
-        <AssociationConnector Association="admin_vulcan2devModel.FK_UserInKeyManagerMasters_UserMasters" />
-        <EntityTypeShape EntityType="admin_vulcan2devModel.CustomerMaster" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="admin_vulcan2devModel.OfferMaster" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="admin_vulcan2devModel.Pending_invoice_Master" Width="1.5" PointX="7.375" PointY="8.75" />
-        <EntityTypeShape EntityType="admin_vulcan2devModel.Summary_Master" Width="1.5" PointX="9.375" PointY="0.75" />
-        <EntityTypeShape EntityType="admin_vulcan2devModel.OrderMaster" Width="1.5" PointX="11.375" PointY="0.75" />
-        <EntityTypeShape EntityType="admin_vulcan2devModel.KeyManagerMaster" Width="1.5" PointX="0.75" PointY="12" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.CustomerMaster" Width="1.5" PointX="5.75" PointY="6.75" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.KeyManagerMaster" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.OfferMaster" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.OrderMaster" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.Pending_invoice_Master" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.RoleMaster" Width="1.5" PointX="3.75" PointY="7.5" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.Summary_Master" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.UserInKeyManagerMaster" Width="1.5" PointX="3" PointY="2.625" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.UserInRoleMaster" Width="1.5" PointX="6" PointY="2.625" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.UserMaster" Width="1.5" PointX="0.75" PointY="2" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.UserPasswordHistory" Width="1.5" PointX="2.75" PointY="11.75" />
         <AssociationConnector Association="admin_vulcan2devModel.FK_UserInKeyManagerMasters_KeyManagerMasters" />
+        <AssociationConnector Association="admin_vulcan2devModel.FK_UserInRoleMasters_RoleMasters" />
+        <AssociationConnector Association="admin_vulcan2devModel.FK_UserInKeyManagerMasters_UserMasters" />
+        <AssociationConnector Association="admin_vulcan2devModel.FK_UserInRoleMasters_UserMasters" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

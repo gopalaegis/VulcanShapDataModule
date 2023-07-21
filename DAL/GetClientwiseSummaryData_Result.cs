@@ -16,9 +16,9 @@ namespace DAL
         public Nullable<decimal> sales { get; set; }
         public Nullable<decimal> Open_orders { get; set; }
         public Nullable<decimal> OrderIntake { get; set; }
+        public Nullable<decimal> Annual_sales { get; set; }
         public string Sold_to_party { get; set; }
         public string KEYMANAGER { get; set; }
         public string Sold_to_pt { get; set; }
-        public Nullable<decimal> Annual_sales { get; set; }
     }
 }

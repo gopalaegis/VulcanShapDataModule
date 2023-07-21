@@ -19,10 +19,8 @@ namespace DAL
         public int KeyManagerID { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
-        public string KeyManager { get; set; }
-        public string KeyManager_Name { get; set; }
     
-        public virtual UserMaster UserMaster { get; set; }
         public virtual KeyManagerMaster KeyManagerMaster { get; set; }
+        public virtual UserMaster UserMaster { get; set; }
     }
 }

@@ -17,8 +17,8 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserMaster()
         {
-            this.UserInRoleMasters = new HashSet<UserInRoleMaster>();
             this.UserInKeyManagerMasters = new HashSet<UserInKeyManagerMaster>();
+            this.UserInRoleMasters = new HashSet<UserInRoleMaster>();
         }
     
         public int ID { get; set; }
@@ -35,8 +35,8 @@ namespace DAL
         public bool IsFirstLogin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserInRoleMaster> UserInRoleMasters { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserInKeyManagerMaster> UserInKeyManagerMasters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserInRoleMaster> UserInRoleMasters { get; set; }
     }
 }

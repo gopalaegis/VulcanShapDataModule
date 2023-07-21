@@ -45,6 +45,5 @@ namespace DAL
         public string Cust_Ind_C { get; set; }
         public string Cust_Ind_D { get; set; }
         public string OrdRs { get; set; }
-        public Nullable<int> Cust_Code { get; set; }
     }
 }

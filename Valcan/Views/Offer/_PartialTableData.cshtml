@@ -12,9 +12,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Key_Managr)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Sold_to_pt)
             </th>
             <th>
@@ -59,64 +56,65 @@
             <th>
                 @Html.DisplayNameFor(model => model.Order_Expected)
             </th>
-
+            <th>
+                @Html.DisplayNameFor(model => model.Key_Managr)
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key_Managr)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sold_to_pt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name_1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Document)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Item)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.strDoc_Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Purchase_order_number)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Material)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Material_Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ConfirmQty)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Net_price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Net_Value)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Curr)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Exch_Rate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Offer_Value_INR)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Order_Expected)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sold_to_pt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name_1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Document)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.strDoc_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Purchase_order_number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Material)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Material_Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConfirmQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Net_price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Net_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Exch_Rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Offer_Value_INR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order_Expected)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Key_Managr)
+            </td>
 
-
-            </tr>
+        </tr>
         }
     </tbody>
 </table>
@@ -142,25 +140,25 @@
             }],
             columnDefs: [
                 {
+                    targets: [09],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                },
+                {
                     targets: [10],
                     render: function (data, type, row, meta) {
                         return parseInt(data).toLocaleString('en-US');
                     }
                 },
                 {
-                    targets: [11],
+                    targets: [13],
                     render: function (data, type, row, meta) {
                         return parseInt(data).toLocaleString('en-US');
                     }
                 },
                 {
                     targets: [14],
-                    render: function (data, type, row, meta) {
-                        return parseInt(data).toLocaleString('en-US');
-                    }
-                },
-                {
-                    targets: [15],
                     render: function (data, type, row, meta) {
                         return parseInt(data).toLocaleString('en-US');
                     }
@@ -185,7 +183,7 @@
 
                 // Total over this page
                 pageTotal = api
-                    .column(14, { search: 'applied' })
+                    .column(13, { search: 'applied' })
                     .data()
                     .reduce(function (a, b) {
                         return parseFloat(a) + parseFloat(b);
@@ -201,7 +199,7 @@
 
                 // Total over this page
                 pageTotal2 = api
-                    .column(15, { search: 'applied' })
+                    .column(14, { search: 'applied' })
                     .data()
                     .reduce(function (a, b) {
                         return parseFloat(a) + parseFloat(b);

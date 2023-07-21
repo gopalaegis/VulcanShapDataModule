@@ -27,17 +27,17 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<CustomerMaster> CustomerMasters { get; set; }
+        public virtual DbSet<KeyManagerMaster> KeyManagerMasters { get; set; }
+        public virtual DbSet<OfferMaster> OfferMasters { get; set; }
+        public virtual DbSet<OrderMaster> OrderMasters { get; set; }
+        public virtual DbSet<Pending_invoice_Master> Pending_invoice_Master { get; set; }
         public virtual DbSet<RoleMaster> RoleMasters { get; set; }
+        public virtual DbSet<Summary_Master> Summary_Master { get; set; }
+        public virtual DbSet<UserInKeyManagerMaster> UserInKeyManagerMasters { get; set; }
         public virtual DbSet<UserInRoleMaster> UserInRoleMasters { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<UserPasswordHistory> UserPasswordHistories { get; set; }
-        public virtual DbSet<UserInKeyManagerMaster> UserInKeyManagerMasters { get; set; }
-        public virtual DbSet<CustomerMaster> CustomerMasters { get; set; }
-        public virtual DbSet<OfferMaster> OfferMasters { get; set; }
-        public virtual DbSet<Pending_invoice_Master> Pending_invoice_Master { get; set; }
-        public virtual DbSet<Summary_Master> Summary_Master { get; set; }
-        public virtual DbSet<OrderMaster> OrderMasters { get; set; }
-        public virtual DbSet<KeyManagerMaster> KeyManagerMasters { get; set; }
     
         public virtual ObjectResult<GetClientwiseSummaryData_Result> GetClientwiseSummaryData(Nullable<int> userId, Nullable<System.DateTime> fyStart, Nullable<System.DateTime> fyend, string kAMId)
         {

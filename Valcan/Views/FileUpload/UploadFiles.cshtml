@@ -18,22 +18,45 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Upload" class="btn btn-primary" />
-                <input type="button" id="btnLoadall" class="btn btn-primary" value="Load All Excel Data" onclick="location.href='@Url.Action("LoadALlExcelData", "FileUpload")'" />
+                <input type="button" id="btnLoadall" class="btn btn-primary" value="Load All Excel Data" onclick="return loadExcelData()" />
 
             </div>
-            
+
         </div>
         <br />
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10 text-success">
+            <div class="col-md-offset-2 col-md-10 text-success error-msg">
                 @ViewBag.UploadStatus
             </div>
         </div>
 
     </div>
 
-    
+
     @*<a href=" @Url.Action("LoadALlExcelData", "FileUpload")">
-        <i class="fa fa-database"></i> Load All Excel Data
-    </a>*@
+            <i class="fa fa-database"></i> Load All Excel Data
+        </a>*@
 }
+<script type="text/javascript">
+    function loadExcelData() {
+        $("#ajax-loader").show();
+        $.ajax({
+            url: "@Url.Action("LoadALlExcelData", "FileUpload")",
+            type: "GET",
+            beforeSend: function () {
+                $("#ajax-loader").show();
+            },
+            error: function (xmlHttpRequest, errorText, thrownError) {
+                //alert(xmlHttpRequest + "|" + errorText + "|" + thrownError);
+                $("#ajax-loader").hide();
+                $(".error-msg").html(errorText + "---------------" + thrownError + "--------------------" + xmlHttpRequest);
+            },
+            success: function (data) {
+                $(".error-msg").html(data);
+            },
+            complete: function () {
+                $("#ajax-loader").hide();
+            }
+        });
+    }
+</script>

@@ -41,6 +41,5 @@ namespace DAL
         public string AGENT { get; set; }
         public string TARGET { get; set; }
         public string EMPLOYEE { get; set; }
-        public Nullable<int> Cust_Code { get; set; }
     }
 }

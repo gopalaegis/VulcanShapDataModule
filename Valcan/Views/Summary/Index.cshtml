@@ -167,7 +167,32 @@
                     autoFilter: true,
                     sheetName: 'Exported data'
                 }],
-
+                columnDefs: [
+                    {
+                        targets: [2],
+                        render: function (data, type, row, meta) {
+                            return parseInt(data).toLocaleString('en-US');
+                        }
+                    },
+                    {
+                        targets: [3],
+                        render: function (data, type, row, meta) {
+                            return parseInt(data).toLocaleString('en-US');
+                        }
+                    },
+                    {
+                        targets: [4],
+                        render: function (data, type, row, meta) {
+                            return parseInt(data).toLocaleString('en-US');
+                        }
+                    },
+                    {
+                        targets: [5],
+                        render: function (data, type, row, meta) {
+                            return parseInt(data).toLocaleString('en-US');
+                        }
+                    }
+                ],
             });
             $('#dataTable2').DataTable().columns.adjust();
             $('body').find('.dataTables_scroll').wrap('<div id="scroll_div"></div>');

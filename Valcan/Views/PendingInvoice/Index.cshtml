@@ -74,13 +74,13 @@
                 }],
                 columnDefs: [
                     {
-                        targets: [9],
+                        targets: [4],
                         render: function (data, type, row, meta) {
                             return parseInt(data).toLocaleString('en-US');
                         }
                     },
                     {
-                        targets: [10],
+                        targets: [5],
                         render: function (data, type, row, meta) {
                             return parseInt(data).toLocaleString('en-US');
                         }
@@ -91,7 +91,7 @@
                     var api = this.api();
 
                     pageTotal = api
-                        .column(10, { search: 'applied' })
+                        .column(5, { search: 'applied' })
                         .data()
                         .reduce(function (a, b) {
                             return parseFloat(a) + parseFloat(b);

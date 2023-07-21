@@ -74,7 +74,7 @@ namespace Valcan.CommandClass
             try
             {
 
-               
+                
                 var directory = new DirectoryInfo(MapPath("~/Document"));
                 
 
@@ -208,25 +208,25 @@ namespace Valcan.CommandClass
                                 }
                                 try
                                 {
-                                    tblObj.CreatedON = DateTime.ParseExact(row[15].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                                    tblObj.CreatedON = DateTime.ParseExact(row[15].ToString().Replace("/", "-"), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 }
                                 catch (Exception)
                                 {
                                     try
                                     {
-                                        tblObj.CreatedON = DateTime.ParseExact(row[15].ToString(), "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        tblObj.CreatedON = DateTime.ParseExact(row[15].ToString().Replace("/", "-"), "d-M-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                     }
                                     catch (Exception)
                                     {
                                         try
                                         {
-                                            tblObj.CreatedON = DateTime.ParseExact(row[15].ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                            tblObj.CreatedON = DateTime.ParseExact(row[15].ToString().Replace("/", "-"), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                         }
                                         catch (Exception)
                                         {
                                             try
                                             {
-                                                tblObj.CreatedON = DateTime.ParseExact(row[15].ToString(), "MM-dd-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                                tblObj.CreatedON = DateTime.ParseExact(row[15].ToString().Replace("/", "-"), "M-d-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                             }
                                             catch (Exception)
                                             {
@@ -374,26 +374,26 @@ namespace Valcan.CommandClass
                                 }
                                 try
                                 {
-                                    tblObj.Created_on = DateTime.ParseExact(row[7].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                                    tblObj.Created_on = DateTime.ParseExact(row[7].ToString().Replace("/", "-"), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 }
                                 catch (Exception)
                                 {
                                     try
                                     {
-                                        tblObj.Created_on = DateTime.ParseExact(row[7].ToString(), "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        tblObj.Created_on = DateTime.ParseExact(row[7].ToString().Replace("/", "-"), "d-M-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                     }
                                     catch (Exception)
                                     {
                                         try
                                         {
-                                            tblObj.Created_on = DateTime.ParseExact(row[7].ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                            tblObj.Created_on = DateTime.ParseExact(row[7].ToString().Replace("/", "-"), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                         }
                                         catch (Exception)
                                         {
 
                                             try
                                             {
-                                                tblObj.Created_on = DateTime.ParseExact(row[7].ToString(), "MM-dd-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                                tblObj.Created_on = DateTime.ParseExact(row[7].ToString().Replace("/", "-"), "M-d-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                             }
                                             catch (Exception)
                                             {
@@ -437,26 +437,26 @@ namespace Valcan.CommandClass
                                 }
                                 try
                                 {
-                                    tblObj.PO_date = DateTime.ParseExact(row[17].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                                    tblObj.PO_date = DateTime.ParseExact(row[17].ToString().Replace("/", "-"), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 }
                                 catch (Exception)
                                 {
                                     try
                                     {
-                                        tblObj.PO_date = DateTime.ParseExact(row[17].ToString(), "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        tblObj.PO_date = DateTime.ParseExact(row[17].ToString().Replace("/", "-"), "d-M-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                     }
                                     catch (Exception)
                                     {
                                         try
                                         {
-                                            tblObj.PO_date = DateTime.ParseExact(row[17].ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                            tblObj.PO_date = DateTime.ParseExact(row[17].ToString().Replace("/", "-"), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                         }
                                         catch (Exception)
                                         {
 
                                             try
                                             {
-                                                tblObj.PO_date = DateTime.ParseExact(row[17].ToString(), "MM-dd-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                                tblObj.PO_date = DateTime.ParseExact(row[17].ToString().Replace("/", "-"), "M-d-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                             }
                                             catch (Exception)
                                             {
@@ -496,26 +496,26 @@ namespace Valcan.CommandClass
                                 }
                                 try
                                 {
-                                    tblObj.Req_dlv_dt = DateTime.ParseExact(row[21].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                                    tblObj.Req_dlv_dt = DateTime.ParseExact(row[21].ToString().Replace("/", "-"), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 }
                                 catch (Exception)
                                 {
                                     try
                                     {
-                                        tblObj.Req_dlv_dt = DateTime.ParseExact(row[21].ToString(), "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        tblObj.Req_dlv_dt = DateTime.ParseExact(row[21].ToString().Replace("/", "-"), "d-M-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                     }
                                     catch (Exception)
                                     {
                                         try
                                         {
-                                            tblObj.Req_dlv_dt = DateTime.ParseExact(row[21].ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                            tblObj.Req_dlv_dt = DateTime.ParseExact(row[21].ToString().Replace("/", "-"), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                         }
                                         catch (Exception)
                                         {
 
                                             try
                                             {
-                                                tblObj.Req_dlv_dt = DateTime.ParseExact(row[21].ToString(), "MM-dd-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                                tblObj.Req_dlv_dt = DateTime.ParseExact(row[21].ToString().Replace("/", "-"), "M-d-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                             }
                                             catch (Exception)
                                             {
@@ -557,25 +557,25 @@ namespace Valcan.CommandClass
                                 }
                                 try
                                 {
-                                    tblObj.Production_Date = DateTime.ParseExact(row[29].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                                    tblObj.Production_Date = DateTime.ParseExact(row[29].ToString().Replace("/", "-"), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 }
                                 catch (Exception)
                                 {
                                     try
                                     {
-                                        tblObj.Production_Date = DateTime.ParseExact(row[29].ToString(), "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        tblObj.Production_Date = DateTime.ParseExact(row[29].ToString().Replace("/", "-"), "d-M-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                     }
                                     catch (Exception)
                                     {
                                         try
                                         {
-                                            tblObj.Production_Date = DateTime.ParseExact(row[29].ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                            tblObj.Production_Date = DateTime.ParseExact(row[29].ToString().Replace("/", "-"), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                         }
                                         catch (Exception)
                                         {
                                             try
                                             {
-                                                tblObj.Production_Date = DateTime.ParseExact(row[29].ToString(), "MM-dd-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                                tblObj.Production_Date = DateTime.ParseExact(row[29].ToString().Replace("/", "-"), "M-d-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                             }
                                             catch (Exception)
                                             {
@@ -751,26 +751,26 @@ namespace Valcan.CommandClass
                                 }
                                 try
                                 {
-                                    tblObj.Date = DateTime.ParseExact(row[14].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                                    tblObj.Date = DateTime.ParseExact(row[14].ToString().Replace("/", "-"), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 }
                                 catch (Exception)
                                 {
                                     try
                                     {
-                                        tblObj.Date = DateTime.ParseExact(row[14].ToString(), "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        tblObj.Date = DateTime.ParseExact(row[14].ToString().Replace("/", "-"), "d-M-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                     }
                                     catch (Exception)
                                     {
                                         try
                                         {
-                                            tblObj.Date = DateTime.ParseExact(row[14].ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                            tblObj.Date = DateTime.ParseExact(row[14].ToString().Replace("/", "-"), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                         }
                                         catch (Exception)
                                         {
 
                                             try
                                             {
-                                                tblObj.Date = DateTime.ParseExact(row[14].ToString(), "MM-dd-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                                tblObj.Date = DateTime.ParseExact(row[14].ToString().Replace("/", "-"), "M-d-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                             }
                                             catch (Exception)
                                             {
@@ -935,7 +935,6 @@ namespace Valcan.CommandClass
                             tblObj.Assignment = row[2].ToString();
                             tblObj.Year = row[3].ToString();
                             tblObj.DocumentNo = row[4].ToString();
-                           
                             if (!string.IsNullOrEmpty(row[5].ToString()))
                             {
                                 if (row[5].ToString().Contains("."))
@@ -944,26 +943,26 @@ namespace Valcan.CommandClass
                                 }
                                 try
                                 {
-                                    tblObj.Pstng_Date = DateTime.ParseExact(row[5].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                                    tblObj.Pstng_Date = DateTime.ParseExact(row[5].ToString().Replace("/", "-"), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 }
                                 catch (Exception)
                                 {
                                     try
                                     {
-                                        tblObj.Pstng_Date = DateTime.ParseExact(row[5].ToString(), "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        tblObj.Pstng_Date = DateTime.ParseExact(row[5].ToString().Replace("/", "-"), "d-M-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                     }
                                     catch (Exception)
                                     {
                                         try
                                         {
-                                            tblObj.Pstng_Date = DateTime.ParseExact(row[5].ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                            tblObj.Pstng_Date = DateTime.ParseExact(row[5].ToString().Replace("/", "-"), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                         }
                                         catch (Exception)
                                         {
 
                                             try
                                             {
-                                                tblObj.Pstng_Date = DateTime.ParseExact(row[5].ToString(), "MM-dd-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                                tblObj.Pstng_Date = DateTime.ParseExact(row[5].ToString().Replace("/", "-"), "M-d-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                             }
                                             catch (Exception)
                                             {
@@ -991,7 +990,6 @@ namespace Valcan.CommandClass
                                 //tblObj.Created_on = Convert.ToDateTime(row[7].ToString());
                             }
                             //tblObj.Pstng_Date = row[5].ToString();
-                            
                             if (!string.IsNullOrEmpty(row[6].ToString()))
                             {
                                 if (row[6].ToString().Contains("."))
@@ -1000,26 +998,26 @@ namespace Valcan.CommandClass
                                 }
                                 try
                                 {
-                                    tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                                    tblObj.Doc_Date = DateTime.ParseExact(row[6].ToString().Replace("/", "-"), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 }
                                 catch (Exception)
                                 {
                                     try
                                     {
-                                        tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString(), "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        tblObj.Doc_Date = DateTime.ParseExact(row[6].ToString().Replace("/", "-"), "d-M-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                     }
                                     catch (Exception)
                                     {
                                         try
                                         {
-                                            tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                            tblObj.Doc_Date = DateTime.ParseExact(row[6].ToString().Replace("/", "-"), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                         }
                                         catch (Exception)
                                         {
 
                                             try
                                             {
-                                                tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString(), "MM-dd-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                                tblObj.Doc_Date = DateTime.ParseExact(row[6].ToString().Replace("/", "-"), "M-d-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                             }
                                             catch (Exception)
                                             {
@@ -1054,7 +1052,6 @@ namespace Valcan.CommandClass
                             tblObj.Amount_in_LC = row[11].ToString();
                             tblObj.Amount_in_LC1 = row[12].ToString();
                             tblObj.Text = row[13].ToString();
-                           
                             if (!string.IsNullOrEmpty(row[14].ToString()))
                             {
                                 if (row[14].ToString().Contains("."))
@@ -1063,26 +1060,26 @@ namespace Valcan.CommandClass
                                 }
                                 try
                                 {
-                                    tblObj.Bline_Date = DateTime.ParseExact(row[14].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                                    tblObj.Bline_Date = DateTime.ParseExact(row[14].ToString().Replace("/", "-"), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 }
                                 catch (Exception)
                                 {
                                     try
                                     {
-                                        tblObj.Bline_Date = DateTime.ParseExact(row[14].ToString(), "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        tblObj.Bline_Date = DateTime.ParseExact(row[14].ToString().Replace("/", "-"), "d-M-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                     }
                                     catch (Exception)
                                     {
                                         try
                                         {
-                                            tblObj.Bline_Date = DateTime.ParseExact(row[14].ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                            tblObj.Bline_Date = DateTime.ParseExact(row[14].ToString().Replace("/", "-"), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                         }
                                         catch (Exception)
                                         {
 
                                             try
                                             {
-                                                tblObj.Bline_Date = DateTime.ParseExact(row[14].ToString(), "MM-dd-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                                tblObj.Bline_Date = DateTime.ParseExact(row[14].ToString().Replace("/","-"), "M-d-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                             }
                                             catch (Exception)
                                             {
@@ -1244,25 +1241,25 @@ namespace Valcan.CommandClass
                                 }
                                 try
                                 {
-                                    tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                                    tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString().Replace("/", "-"), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 }
                                 catch (Exception)
                                 {
                                     try
                                     {
-                                        tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString(), "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString().Replace("/", "-"), "d-M-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                     }
                                     catch (Exception)
                                     {
                                         try
                                         {
-                                            tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                            tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString().Replace("/", "-"), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                         }
                                         catch (Exception)
                                         {
                                             try
                                             {
-                                                tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString(), "MM-dd-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                                tblObj.Doc_Date = DateTime.ParseExact(row[7].ToString().Replace("/", "-"), "M-d-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                             }
                                             catch (Exception)
                                             {
@@ -1307,26 +1304,26 @@ namespace Valcan.CommandClass
                                 }
                                 try
                                 {
-                                    tblObj.Dlv_Date = DateTime.ParseExact(row[17].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                                    tblObj.Dlv_Date = DateTime.ParseExact(row[17].ToString().Replace("/", "-"), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 }
                                 catch (Exception)
                                 {
                                     try
                                     {
-                                        tblObj.Dlv_Date = DateTime.ParseExact(row[17].ToString(), "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        tblObj.Dlv_Date = DateTime.ParseExact(row[17].ToString().Replace("/", "-"), "d-M-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                     }
                                     catch (Exception)
                                     {
                                         try
                                         {
-                                            tblObj.Dlv_Date = DateTime.ParseExact(row[17].ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                            tblObj.Dlv_Date = DateTime.ParseExact(row[17].ToString().Replace("/", "-"), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                         }
                                         catch (Exception)
                                         {
 
                                             try
                                             {
-                                                tblObj.Dlv_Date = DateTime.ParseExact(row[17].ToString(), "MM-dd-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                                tblObj.Dlv_Date = DateTime.ParseExact(row[17].ToString().Replace("/", "-"), "M-d-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                             }
                                             catch (Exception)
                                             {
