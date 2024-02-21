@@ -1,11 +1,23 @@
 ﻿@model IEnumerable<Valcan.Models.SummaryViewModel>
 
 <div>
-    <b>Total Order Intake 2023	: </b> <label id="lbltotal1" style="color:red;"></label>
+    <b>Total Order Intake @DateTime.Now.Year	: </b> <label id="lbltotal1" style="color:red;"></label>
     <br />
-    <b>Total Sales 2022-23 :</b> <label id="lbltotal2" style="color:red;"></label>
+
+    @if (DateTime.Now.Month >= 4)
+    {
+        <b>Sales @DateTime.Now.AddYears(-1).Year - @DateTime.Now.Year :</b> <label id="lbltotal2" style="color:red;"></label>
+    }
+    else
+    {
+        <b>Sales @DateTime.Now.AddYears(-2).Year - @DateTime.Now.AddYears(-1).ToString("yy") :</b> <label id="lbltotal2" style="color:red;"></label>
+    }
+
+
     <br />
+
     <b>Total Open Orders :</b> <label id="lbltotal3" style="color:red;"></label>
+
 
 </div>
 <br />
@@ -15,13 +27,13 @@
         <tr>
 
             @*<th>
-            Customer count
-        </th>*@
+                    Customer count
+                </th>*@
             <th>
                 Key Manager
             </th>
             <th>
-                Order Intake 2023
+                Order Intake @DateTime.Now.Year
             </th>
             <th>
                 Sales 2022-23
@@ -37,27 +49,27 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
+            <tr>
 
-            @*<td>
-            @Html.DisplayFor(modelitem => item.Sold_to_party)
-        </td>*@
-            <td>
-                @Html.DisplayFor(modelitem => item.KEYMANAGER)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Incoming_orders_cast)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Sales_cast)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Open_orders_cast)
-            </td>
-            <td>
-                <input type="button" value="show details" id="btndetails" onclick="return getDetails('@item.KEYMANAGER_id', '@item.KEYMANAGER');" />
-            </td>
-        </tr>
+                @*<td>
+                        @Html.DisplayFor(modelitem => item.Sold_to_party)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelitem => item.KEYMANAGER)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Incoming_orders_cast)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Sales_cast)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Open_orders_cast)
+                </td>
+                <td>
+                    <input type="button" value="show details" id="btndetails" onclick="return getDetails('@item.KEYMANAGER_id', '@item.KEYMANAGER');" />
+                </td>
+            </tr>
         }
     </tbody>
 </table>

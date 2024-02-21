@@ -85,6 +85,9 @@
     <Compile Include="Summary_Master.cs">
       <DependentUpon>ValcanModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UploadExcel_Audit.cs">
+      <DependentUpon>ValcanModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserInKeyManagerMaster.cs">
       <DependentUpon>ValcanModel.tt</DependentUpon>
     </Compile>

@@ -11,7 +11,7 @@ namespace Valcan.Models
     {
         public int ID { get; set; }
         [Remote("KeyManagerAlreadyExists", "KeyManagerMaster", AdditionalFields = "ID,KeyManager", ErrorMessage = "This Key Manager already exists")]
-        [Required(ErrorMessage = "This Field is Required")]
+        //[Required(ErrorMessage = "This Field is Required")]
         public string KeyManager { get; set; }
         [Required(ErrorMessage = "This Field is Required")]
         public string KeyManager_Name { get; set; }

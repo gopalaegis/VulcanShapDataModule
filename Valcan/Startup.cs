@@ -15,7 +15,7 @@ namespace Valcan
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Startup));  //Declaring Log4Net
         public void Configuration(IAppBuilder app)
         {
-            Log.Error("Startup");
+            //Log.Error("Startup");
             try
             {
                 GlobalConfiguration.Configuration

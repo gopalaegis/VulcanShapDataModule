@@ -3,7 +3,11 @@
 @using (Html.BeginForm("UploadFiles", "FileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-
+    @*<div class="form-group">
+        <div class="col-md-offset-2 col-md-10 text-success">
+          Last Loaded excel Date: <label id="lstloadDate">@ViewBag.lastUpload</label>  
+        </div>
+    </div>*@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -52,7 +56,8 @@
                 $(".error-msg").html(errorText + "---------------" + thrownError + "--------------------" + xmlHttpRequest);
             },
             success: function (data) {
-                $(".error-msg").html(data);
+                $(".error-msg").html(data.Item1);
+                $("#lstloadDate").html(data.Item2);
             },
             complete: function () {
                 $("#ajax-loader").hide();

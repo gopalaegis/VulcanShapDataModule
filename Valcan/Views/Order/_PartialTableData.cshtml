@@ -20,13 +20,7 @@
                 @Html.DisplayNameFor(model => model.Sch_Line)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sold_to_pt)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Sold_to_party)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Material)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -38,13 +32,13 @@
                 @Html.DisplayNameFor(model => model.Open_Qty)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Remarks_from_Production)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Req_dlv_dt)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Week_Changed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Remarks_from_Production)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Unit_Basic_Price)
@@ -54,6 +48,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Total_Price_IRS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Material)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Purchase_order_no)
@@ -68,6 +65,9 @@
                 @Html.DisplayNameFor(model => model.KEYMANAGER)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Sold_to_pt)
+            </th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Pre_Dispatch_Inspection)
             </th>
             <th>
@@ -84,28 +84,28 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Customer_group_5)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Material_group_1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Remarks_from_Marketing)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Marketing_Sales_Week)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MRP_Controller)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cust_Req_Week)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cust_Req_Yar)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Your_Ref)
             </th>*@
+            @*<th>
+            @Html.DisplayNameFor(model => model.Material_group_1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks_from_Marketing)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Marketing_Sales_Week)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MRP_Controller)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cust_Req_Week)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cust_Req_Yar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Your_Ref)
+        </th>*@
         </tr>
     </thead>
     <tbody>
@@ -122,13 +122,7 @@
                 @Html.DisplayFor(modelitem => item.Sch_Line)
             </td>
             <td>
-                @Html.DisplayFor(modelitem => item.Sold_to_pt)
-            </td>
-            <td>
                 @Html.DisplayFor(modelitem => item.Sold_to_party)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Material)
             </td>
             <td>
                 @Html.DisplayFor(modelitem => item.Description)
@@ -140,14 +134,15 @@
                 @Html.DisplayFor(modelitem => item.Open_Qty)
             </td>
             <td>
+                @Html.DisplayFor(modelitem => item.Remarks_from_Production)
+            </td>
+            <td>
                 @Html.DisplayFor(modelitem => item.strReq_dlv_dt)
             </td>
             <td>
                 @Html.DisplayFor(modelitem => item.Week_Changed)
             </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Remarks_from_Production)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelitem => item.Unit_Basic_Price)
             </td>
@@ -156,6 +151,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelitem => item.Total_Price_IRS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Material)
             </td>
             <td>
                 @Html.DisplayFor(modelitem => item.Purchase_order_no)
@@ -170,6 +168,9 @@
                 @Html.DisplayFor(modelitem => item.KEYMANAGER)
             </td>
             <td>
+                @Html.DisplayFor(modelitem => item.Sold_to_pt)
+            </td>
+            @*<td>
                 @Html.DisplayFor(modelitem => item.Pre_Dispatch_Inspection)
             </td>
             <td>
@@ -186,29 +187,29 @@
             </td>
             <td>
                 @Html.DisplayFor(modelitem => item.Customer_group_5)
-            </td>
+            </td>*@
 
             @*<td>
-                @Html.DisplayFor(modelitem => item.Material_group_1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Remarks_from_Marketing)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Marketing_Sales_Week)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.MRP_Controller)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Cust_Req_Week)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Cust_Req_Yar)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Your_Ref)
-            </td>*@
+            @Html.DisplayFor(modelitem => item.Material_group_1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelitem => item.Remarks_from_Marketing)
+        </td>
+        <td>
+            @Html.DisplayFor(modelitem => item.Marketing_Sales_Week)
+        </td>
+        <td>
+            @Html.DisplayFor(modelitem => item.MRP_Controller)
+        </td>
+        <td>
+            @Html.DisplayFor(modelitem => item.Cust_Req_Week)
+        </td>
+        <td>
+            @Html.DisplayFor(modelitem => item.Cust_Req_Yar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelitem => item.Your_Ref)
+        </td>*@
 
         </tr>
         }
@@ -238,13 +239,13 @@
             }],
             columnDefs: [
                 {
-                    targets: [12],
+                    targets: [10],
                     render: function (data, type, row, meta) {
                         return parseInt(data).toLocaleString('en-US');
                     }
                 },
                 {
-                    targets: [14],
+                    targets: [12],
                     render: function (data, type, row, meta) {
                         return parseInt(data).toLocaleString('en-US');
                     }
@@ -269,7 +270,7 @@
                 var api = this.api();
 
                 pageTotal = api
-                    .column(14, { search: 'applied' })
+                    .column(12, { search: 'applied' })
                     .data()
                     .reduce(function (a, b) {
                         return parseFloat(a) + parseFloat(b);

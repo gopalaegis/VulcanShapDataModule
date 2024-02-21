@@ -14,7 +14,7 @@ namespace Valcan.Models
         public string Customer { get; set; }
         public string Assignment { get; set; }
         public string Year { get; set; }
-        [Display(Name = "Inv. No.")]
+        [Display(Name = "SAP Document")]
         public string DocumentNo { get; set; }
         public Nullable<System.DateTime> Pstng_Date { get; set; }
         public string strPstng_Date { get; set; }
@@ -26,7 +26,7 @@ namespace Valcan.Models
         public string Doc_Type { get; set; }
         public string Period { get; set; }
         public string D_C { get; set; }
-        [Display(Name = "Credit Amount")]
+        [Display(Name = "Pending amount in INR")]
         public string Amount_in_LC { get; set; }
         public string Amount_in_LC1 { get; set; }
         [Display(Name = "Remarks")]
@@ -35,8 +35,10 @@ namespace Valcan.Models
         public string strBline_Date { get; set; }
         [Display(Name = "Pay. Term")]
         public string PayT { get; set; }
+        [Display(Name = "Sales Doc.")]
         public string Sales_Doc { get; set; }
         public string Item { get; set; }
+        [Display(Name = "Invoice No")]
         public string Payment_reference { get; set; }
         public string Group { get; set; }
         public string Plan_group { get; set; }
@@ -56,10 +58,10 @@ namespace Valcan.Models
         public string Last_name_First_name { get; set; }
         [Display(Name = "Curr")]
         public string Crcy { get; set; }
-        [Display(Name = "Inv. Amount")]
+        [Display(Name = "Pending Amount")]
         public string Amount { get; set; }
         public string Amount1 { get; set; }
-        [Display(Name = "Date Diff")]
+        [Display(Name = "Due days")]
         public string Day1 { get; set; }
         public string Disc1 { get; set; }
         [Display(Name = "Key Manager")]

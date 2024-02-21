@@ -39,7 +39,7 @@
 <link href="~/Scripts/JQueryDataTable/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="~/Scripts/JQueryDataTable/responsive.dataTables.min.css" rel="stylesheet" />
 <link href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css" rel="stylesheet" />
-
+<link href="~/Scripts/JQueryDataTable/buttons.dataTables.min.css" rel="stylesheet" />
 <div class="row" id="partialTableData">
     @Html.Partial("_PartialTableData", Model)
 </div>
@@ -54,6 +54,7 @@
     <script src="~/Scripts/JQueryDataTable/1.13.4/jszip.min.js"></script>
     <script src="~/Scripts/JQueryDataTable/1.13.4/buttons.html5.min.js"></script>
     <script src="~/Scripts/jquery.doubleScroll.min.js"></script>
+    <script src="~/Scripts/buttons.colVis.min.js"></script>
     <script>
         var table;
         $(document).ready(function () {
@@ -74,13 +75,13 @@
                 }],
                 columnDefs: [
                     {
-                        targets: [12],
+                        targets: [10],
                         render: function (data, type, row, meta) {
                             return parseInt(data).toLocaleString('en-US');
                         }
                     },
                     {
-                        targets: [14],
+                        targets: [12],
                         render: function (data, type, row, meta) {
                             return parseInt(data).toLocaleString('en-US');
                         }
@@ -105,7 +106,7 @@
                     var api = this.api();
 
                     pageTotal = api
-                        .column(14, { search: 'applied' })
+                        .column(12, { search: 'applied' })
                         .data()
                         .reduce(function (a, b) {
                             return parseFloat(a) + parseFloat(b);

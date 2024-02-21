@@ -38,6 +38,7 @@ namespace DAL
         public virtual DbSet<UserInRoleMaster> UserInRoleMasters { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<UserPasswordHistory> UserPasswordHistories { get; set; }
+        public virtual DbSet<UploadExcel_Audit> UploadExcel_Audit { get; set; }
     
         public virtual ObjectResult<GetClientwiseSummaryData_Result> GetClientwiseSummaryData(Nullable<int> userId, Nullable<System.DateTime> fyStart, Nullable<System.DateTime> fyend, string kAMId)
         {

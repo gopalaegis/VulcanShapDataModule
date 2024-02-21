@@ -173,7 +173,7 @@ namespace Valcan.CommandClass
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    SqlConnection con = new SqlConnection("Data Source=72.52.128.82;Initial Catalog=admin_vulcan2dev;User ID=admin_vulcan2dev;Password=Rd~g4f6t0m2LHuchr");
+                    SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["Connectionstring"]);
                     string s = "Truncate Table customermaster";
                     con.Open();
                     SqlCommand Com = new SqlCommand(s, con);
@@ -347,7 +347,7 @@ namespace Valcan.CommandClass
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    SqlConnection con = new SqlConnection("Data Source=72.52.128.82;Initial Catalog=admin_vulcan2dev;User ID=admin_vulcan2dev;Password=Rd~g4f6t0m2LHuchr");
+                    SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["Connectionstring"]);
                     string s = "Truncate Table ordermaster";
                     con.Open();
                     SqlCommand Com = new SqlCommand(s, con);
@@ -716,7 +716,7 @@ namespace Valcan.CommandClass
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    SqlConnection con = new SqlConnection("Data Source=72.52.128.82;Initial Catalog=admin_vulcan2dev;User ID=admin_vulcan2dev;Password=Rd~g4f6t0m2LHuchr");
+                    SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["Connectionstring"]);
                     string s = "Truncate Table summary_master";
                     con.Open();
                     SqlCommand Com = new SqlCommand(s, con);
@@ -918,7 +918,7 @@ namespace Valcan.CommandClass
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    SqlConnection con = new SqlConnection("Data Source=72.52.128.82;Initial Catalog=admin_vulcan2dev;User ID=admin_vulcan2dev;Password=Rd~g4f6t0m2LHuchr");
+                    SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["Connectionstring"]);
                     string s = "Truncate Table pending_invoice_Master";
                     con.Open();
                     SqlCommand Com = new SqlCommand(s, con);
@@ -1213,7 +1213,7 @@ namespace Valcan.CommandClass
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    SqlConnection con = new SqlConnection("Data Source=72.52.128.82;Initial Catalog=admin_vulcan2dev;User ID=admin_vulcan2dev;Password=Rd~g4f6t0m2LHuchr");
+                    SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["Connectionstring"]);
                     string s = "Truncate Table offermaster";
                     con.Open();
                     SqlCommand Com = new SqlCommand(s, con);

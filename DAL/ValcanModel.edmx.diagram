@@ -20,6 +20,7 @@
         <AssociationConnector Association="admin_vulcan2devModel.FK_UserInRoleMasters_RoleMasters" />
         <AssociationConnector Association="admin_vulcan2devModel.FK_UserInKeyManagerMasters_UserMasters" />
         <AssociationConnector Association="admin_vulcan2devModel.FK_UserInRoleMasters_UserMasters" />
+        <EntityTypeShape EntityType="admin_vulcan2devModel.UploadExcel_Audit" Width="1.5" PointX="12.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

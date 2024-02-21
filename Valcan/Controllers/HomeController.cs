@@ -40,7 +40,7 @@ namespace Valcan.Controllers
 
         public ActionResult Login(string returnUrl)
         {
-            
+
             ViewBag.ReturnUrl = returnUrl;
             Session.Clear();
             Session.Abandon();
@@ -53,12 +53,12 @@ namespace Valcan.Controllers
         {
             try
             {
-                logger.Error("Current time is: " + DateTime.Now);
+                //logger.Error("Current time is: " + DateTime.Now);
                 if (ModelState.IsValid)
                 {
                     CommonMethod cm = new CommonMethod();
                     model.Password = cm.EncryptData(model.Password, Key);
-                    var a = cm.DecryptData("qyIxscsHmmSioOjZLY2BCQ==", Key);
+                    //var a = cm.DecryptData("SUh75i+cVD5nOa87o72weA==", Key);
 
                     var IsValidUser = db.UserMasters
                   .Where(u => u.EmailID.ToLower() == model.EmailID.ToLower() && u.Password == model.Password && u.IsActive == true).SingleOrDefault();
@@ -66,33 +66,37 @@ namespace Valcan.Controllers
                     {
                         var userID = IsValidUser.ID;
                         var userMail = IsValidUser.EmailID;
-                        var password_period = (from d in db.UserPasswordHistories where d.UserID == userID orderby d.CreatedOn descending select new { lastChangeOn = d.CreatedOn }).Take(1);
 
-                        //var admin_assigned_Period = IsValidUser.ChangePasswordInterval;
-                        var admin_assigned_Period = ChangePasswordInterval;
+                        var userRole = (from r in db.RoleMasters join u in db.UserInRoleMasters on r.ID equals u.RoleID where u.UserID == IsValidUser.ID select r.RoleName).FirstOrDefault();
 
-                        //var dmin_assigned_Period_todate = DateTime.ParseExact(admin_assigned_Period, "dd", System.Globalization.CultureInfo.InvariantCulture);
-                        TimeSpan difference = new TimeSpan();
-                        foreach (var i in password_period)
+                        if (userRole != "SuperAdmin")
                         {
-                            difference = (TimeSpan)(DateTime.Now - i.lastChangeOn);
-                        }
-                        if (difference.Days > admin_assigned_Period)
-                        {
-                            ViewData["error"] = "Password has been reset";
-                            Session["UserMail"] = IsValidUser.EmailID;
-                            return RedirectToAction("ResetPassword");
-                        }
-                        if (!User.IsInRole("SuperAdmin"))
-                        {
+                            var password_period = (from d in db.UserPasswordHistories where d.UserID == userID orderby d.CreatedOn descending select new { lastChangeOn = d.CreatedOn }).Take(1);
+
+                            //var admin_assigned_Period = IsValidUser.ChangePasswordInterval;
+                            var admin_assigned_Period = ChangePasswordInterval;
+
+                            //var dmin_assigned_Period_todate = DateTime.ParseExact(admin_assigned_Period, "dd", System.Globalization.CultureInfo.InvariantCulture);
+                            TimeSpan difference = new TimeSpan();
+                            foreach (var i in password_period)
+                            {
+                                difference = (TimeSpan)(DateTime.Now - i.lastChangeOn);
+                            }
+                            if (difference.Days > admin_assigned_Period)
+                            {
+                                ViewData["error"] = "Password has been reset";
+                                Session["UserMail"] = IsValidUser.EmailID;
+                                return RedirectToAction("ResetPassword");
+                            }
+
                             if (IsValidUser.IsFirstLogin == true)
                             {
                                 Session["UserMail"] = IsValidUser.EmailID;
                                 return RedirectToAction("ResetPassword");
 
                             }
-
                         }
+                        
                         FormsAuthentication.SetAuthCookie(model.EmailID, false);
                         Session["UserID"] = IsValidUser.ID;
                         Session["UserMail"] = IsValidUser.EmailID;
@@ -1481,9 +1485,9 @@ namespace Valcan.Controllers
             string extension = System.IO.Path.GetExtension(filename).ToLower();
             string[] validFileTypes = { ".xls", ".xlsx" };
 
-            
+
             string path1 = string.Format("{0}/{1}", Server.MapPath("~/Document"), filename);
-            
+
             if (validFileTypes.Contains(extension))
             {
                 //Connection String to Excel Workbook

@@ -23,6 +23,11 @@ namespace Valcan.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+            var lastUpload = db.UploadExcel_Audit.OrderByDescending(x => x.Id).FirstOrDefault();
+            if (lastUpload != null)
+            {
+                ViewBag.lastUpload = lastUpload.UploadDate;
+            }
             return View(await db.KeyManagerMasters.Where(x => x.IsActive == true).ToListAsync());
         }
 
@@ -63,6 +68,10 @@ namespace Valcan.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (reasonManagementMasterVM.KeyManager == null)
+                    {
+                        reasonManagementMasterVM.KeyManager = string.Empty;
+                    }
                     KeyManagerMaster reasonManagement = new KeyManagerMaster
                     {
                         KeyManager = reasonManagementMasterVM.KeyManager,
@@ -127,6 +136,10 @@ namespace Valcan.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (reasonManagementVM.KeyManager == null)
+                    {
+                        reasonManagementVM.KeyManager = string.Empty;
+                    }
                     KeyManagerMaster reasonManagementMaster = await db.KeyManagerMasters.FindAsync(reasonManagementVM.ID);
                     reasonManagementMaster.KeyManager = reasonManagementVM.KeyManager;
                     reasonManagementMaster.KeyManager_Name = reasonManagementVM.KeyManager_Name;

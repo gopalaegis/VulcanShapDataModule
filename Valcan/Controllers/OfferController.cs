@@ -25,6 +25,11 @@ namespace Valcan.Controllers
                     return RedirectToAction("Login", "Home");
                 }
                 var uid = (int)Session["UserID"];
+                var lastUpload = db.UploadExcel_Audit.OrderByDescending(x => x.Id).FirstOrDefault();
+                if (lastUpload != null)
+                {
+                    ViewBag.lastUpload = lastUpload.UploadDate;
+                }
                 //var keymagrlst = db.UserInKeyManagerMasters.Where(x => x.UserID == (int)Session["UserID"]).Select(x => x.KeyManagerID).ToList();
 
                 //var offerlst = db.OfferMasters.Where(x => x.Key_Managr.Contains()).ToListAsync();

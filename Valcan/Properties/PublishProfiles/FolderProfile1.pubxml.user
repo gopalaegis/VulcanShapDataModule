@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>D:\ValcanPublish</_PublishTargetUrl>
-    <History>True|2023-07-20T11:43:27.7464232Z;True|2023-07-12T17:25:59.9724608+05:30;True|2023-07-12T17:01:33.1785014+05:30;True|2023-07-06T17:45:05.6777932+05:30;True|2023-07-06T16:51:38.6182674+05:30;True|2023-07-06T12:25:10.1880976+05:30;True|2023-07-05T17:43:28.8723410+05:30;True|2023-06-21T17:28:04.0409118+05:30;True|2023-06-21T15:24:13.0579033+05:30;True|2023-06-21T14:23:17.5480638+05:30;True|2023-06-14T12:43:11.4297557+05:30;False|2023-06-05T12:16:05.0940939+05:30;False|2023-06-05T12:12:45.1799191+05:30;False|2023-06-05T12:12:22.5579571+05:30;False|2023-06-05T12:12:03.7748213+05:30;False|2023-06-05T12:11:54.6660535+05:30;False|2023-06-05T12:06:07.4525272+05:30;True|2023-06-02T20:13:35.1799788+05:30;True|2023-05-30T17:09:58.4791462+05:30;True|2023-05-30T12:34:55.0576194+05:30;True|2023-05-29T18:22:02.5437270+05:30;True|2023-05-29T18:20:34.5401056+05:30;True|2023-05-29T15:13:08.8472767+05:30;True|2023-05-27T13:06:09.6951401+05:30;True|2023-05-26T16:09:14.5199050+05:30;True|2023-05-25T11:59:16.2023261+05:30;True|2023-05-24T13:14:02.9528263+05:30;True|2023-05-23T15:34:46.0082668+05:30;True|2023-05-10T17:37:05.5277739+05:30;True|2023-05-08T15:32:24.0803645+05:30;False|2023-05-08T15:27:25.0294411+05:30;True|2023-05-02T17:20:08.8489222+05:30;True|2023-05-01T18:29:37.7336881+05:30;True|2023-04-24T11:23:09.3800947+05:30;True|2023-04-22T15:17:21.5178764+05:30;True|2023-04-22T15:14:23.0895515+05:30;True|2023-04-22T15:05:36.7406517+05:30;True|2023-04-22T15:00:46.0304616+05:30;True|2023-04-22T14:51:43.1552076+05:30;False|2023-04-22T14:26:57.0528732+05:30;True|2023-04-22T14:12:20.0158334+05:30;True|2023-04-22T14:04:38.5704034+05:30;True|2023-04-22T13:13:58.3105975+05:30;True|2023-04-22T12:52:49.8858537+05:30;True|2023-04-21T11:28:34.9858454+05:30;True|2023-04-21T11:14:30.6089613+05:30;True|2023-04-20T18:45:03.9350173+05:30;True|2023-04-20T18:34:55.8857369+05:30;True|2023-04-20T18:28:17.6766073+05:30;False|2023-04-20T18:26:59.1334755+05:30;False|2023-04-20T18:26:34.9738129+05:30;False|2023-04-20T18:26:07.7006245+05:30;False|2023-04-20T18:25:58.0382249+05:30;False|2023-04-20T18:20:10.4543906+05:30;False|2023-04-20T18:20:03.4898156+05:30;True|2023-04-20T18:00:00.4241477+05:30;True|2023-04-20T17:45:07.3306246+05:30;True|2023-04-19T17:16:00.2612927+05:30;True|2023-04-18T16:28:48.0482457+05:30;True|2023-04-14T16:21:07.4039621+05:30;True|2023-03-28T11:38:13.8680510+05:30;True|2023-03-25T13:18:33.4139764+05:30;True|2023-03-25T13:07:44.2481929+05:30;True|2023-03-25T12:09:45.9088261+05:30;True|2023-03-24T14:48:46.5733328+05:30;True|2023-03-23T17:51:04.0611444+05:30;</History>
+    <_PublishTargetUrl>D:\VulcanGitPublish</_PublishTargetUrl>
+    <History>True|2024-02-21T07:52:37.1430663Z;True|2024-02-21T13:20:47.0462729+05:30;True|2024-01-16T18:28:37.7955622+05:30;True|2023-12-11T11:58:37.8494115+05:30;True|2023-08-14T11:33:09.8646628+05:30;False|2023-08-14T11:32:12.4566020+05:30;False|2023-08-14T11:29:08.1517387+05:30;False|2023-08-14T11:28:39.0185887+05:30;False|2023-08-14T11:19:35.2179645+05:30;False|2023-08-14T11:18:42.0058532+05:30;False|2023-08-14T11:18:29.0260261+05:30;True|2023-08-04T16:50:40.1045714+05:30;True|2023-07-21T17:11:16.3404039+05:30;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
@@ -21,13 +21,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/15/2016 23:31:56</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>07/20/2023 17:13:24</publishTime>
+      <publishTime>12/06/2023 16:06:41</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
-      <publishTime>07/12/2023 17:23:23</publishTime>
+      <publishTime>08/04/2023 16:48:48</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>07/20/2023 17:13:24</publishTime>
+      <publishTime>12/06/2023 16:06:41</publishTime>
     </File>
     <File Include="bin/de/Hangfire.Core.resources.dll">
       <publishTime>08/19/2022 12:39:44</publishTime>
@@ -58,9 +58,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/Hangfire.SqlServer.dll">
       <publishTime>08/19/2022 12:40:16</publishTime>
-    </File>
-    <File Include="bin/Irony.dll">
-      <publishTime>07/18/2018 07:10:26</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>07/25/2022 13:10:06</publishTime>
@@ -254,9 +251,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/SixLabors.Fonts.dll">
       <publishTime>10/30/2022 08:47:56</publishTime>
     </File>
-    <File Include="bin/sv/Hangfire.Core.resources.dll">
-      <publishTime>03/30/2023 10:18:34</publishTime>
-    </File>
     <File Include="bin/System.Buffers.dll">
       <publishTime>02/19/2020 15:35:18</publishTime>
     </File>
@@ -268,9 +262,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/System.IO.FileSystem.Primitives.dll">
       <publishTime>11/05/2016 10:26:08</publishTime>
-    </File>
-    <File Include="bin/System.IO.Packaging.dll">
-      <publishTime>10/23/2021 05:19:36</publishTime>
     </File>
     <File Include="bin/System.IO.UnmanagedMemoryStream.dll">
       <publishTime>11/05/2016 10:26:14</publishTime>
@@ -339,16 +330,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/19/2022 12:39:44</publishTime>
     </File>
     <File Include="bin/Valcan.dll">
-      <publishTime>07/20/2023 17:56:07</publishTime>
+      <publishTime>02/21/2024 13:22:36</publishTime>
     </File>
     <File Include="bin/Valcan.pdb">
-      <publishTime>07/20/2023 17:56:07</publishTime>
+      <publishTime>02/21/2024 13:22:36</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 19:27:34</publishTime>
-    </File>
-    <File Include="bin/XLParser.dll">
-      <publishTime>05/20/2022 14:19:02</publishTime>
     </File>
     <File Include="bin/zh-TW/Hangfire.Core.resources.dll">
       <publishTime>08/19/2022 12:39:44</publishTime>
@@ -433,6 +421,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Scripts/bootstrap.min.js">
       <publishTime>03/15/2023 17:03:37</publishTime>
+    </File>
+    <File Include="Scripts/buttons.colVis.min.js">
+      <publishTime>12/05/2023 19:17:46</publishTime>
     </File>
     <File Include="Scripts/CountryCodeJS/css/demo.css">
       <publishTime>03/16/2023 16:13:20</publishTime>
@@ -520,6 +511,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Scripts/JQueryDataTable/1.13.4/jszip.min.js">
       <publishTime>03/24/2023 14:44:31</publishTime>
+    </File>
+    <File Include="Scripts/JQueryDataTable/buttons.dataTables.min.css">
+      <publishTime>12/05/2023 19:23:31</publishTime>
     </File>
     <File Include="Scripts/JQueryDataTable/dataTables.buttons.min.js">
       <publishTime>03/23/2023 16:33:31</publishTime>
@@ -666,70 +660,70 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/14/2023 18:00:58</publishTime>
     </File>
     <File Include="Views/FileUpload/UploadFiles.cshtml">
-      <publishTime>07/12/2023 12:49:34</publishTime>
+      <publishTime>12/06/2023 17:45:47</publishTime>
     </File>
     <File Include="Views/Home/ChangePassword.cshtml">
-      <publishTime>03/24/2023 14:34:55</publishTime>
+      <publishTime>07/22/2023 12:58:15</publishTime>
     </File>
     <File Include="Views/Home/EditProfile.cshtml">
-      <publishTime>03/24/2023 14:34:55</publishTime>
+      <publishTime>07/22/2023 12:58:24</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>05/09/2023 14:52:05</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
-      <publishTime>03/16/2023 13:00:51</publishTime>
+      <publishTime>07/22/2023 12:56:00</publishTime>
     </File>
     <File Include="Views/Home/NoScript.cshtml">
       <publishTime>03/24/2023 14:34:55</publishTime>
     </File>
     <File Include="Views/Home/ResetPassword.cshtml">
-      <publishTime>03/24/2023 14:34:55</publishTime>
+      <publishTime>07/22/2023 12:55:56</publishTime>
     </File>
     <File Include="Views/Home/ShowProfile.cshtml">
       <publishTime>03/24/2023 14:34:55</publishTime>
     </File>
     <File Include="Views/KeyManagerMaster/Create.cshtml">
-      <publishTime>04/17/2023 18:56:09</publishTime>
+      <publishTime>07/22/2023 12:55:53</publishTime>
     </File>
     <File Include="Views/KeyManagerMaster/Delete.cshtml">
-      <publishTime>03/16/2023 19:10:11</publishTime>
+      <publishTime>07/22/2023 12:55:50</publishTime>
     </File>
     <File Include="Views/KeyManagerMaster/Details.cshtml">
       <publishTime>03/16/2023 19:11:03</publishTime>
     </File>
     <File Include="Views/KeyManagerMaster/Edit.cshtml">
-      <publishTime>04/18/2023 12:20:11</publishTime>
+      <publishTime>07/22/2023 12:55:47</publishTime>
     </File>
     <File Include="Views/KeyManagerMaster/Index.cshtml">
       <publishTime>04/18/2023 12:19:17</publishTime>
     </File>
     <File Include="Views/Offer/Index.cshtml">
-      <publishTime>06/13/2023 18:02:09</publishTime>
+      <publishTime>12/06/2023 18:32:27</publishTime>
     </File>
     <File Include="Views/Offer/_PartialTableData.cshtml">
-      <publishTime>06/13/2023 18:01:21</publishTime>
+      <publishTime>12/06/2023 18:31:32</publishTime>
     </File>
     <File Include="Views/Order/Index.cshtml">
-      <publishTime>06/14/2023 11:34:52</publishTime>
+      <publishTime>12/06/2023 18:31:17</publishTime>
     </File>
     <File Include="Views/Order/_PartialTableData.cshtml">
-      <publishTime>06/14/2023 11:35:00</publishTime>
+      <publishTime>12/06/2023 18:31:01</publishTime>
     </File>
     <File Include="Views/PendingInvoice/Index.cshtml">
-      <publishTime>06/13/2023 19:01:58</publishTime>
+      <publishTime>12/11/2023 11:44:42</publishTime>
     </File>
     <File Include="Views/PendingInvoice/_PartialTableData.cshtml">
-      <publishTime>06/13/2023 19:04:03</publishTime>
+      <publishTime>12/11/2023 11:44:29</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>03/15/2023 17:03:37</publishTime>
     </File>
     <File Include="Views/Shared/_EditUserPopup.cshtml">
-      <publishTime>05/13/2023 11:41:21</publishTime>
+      <publishTime>07/22/2023 12:55:44</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/27/2023 12:55:38</publishTime>
+      <publishTime>12/06/2023 17:57:46</publishTime>
     </File>
     <File Include="Views/Shared/_Notification.cshtml">
       <publishTime>03/16/2023 13:59:51</publishTime>
@@ -744,25 +738,25 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/21/2023 11:15:29</publishTime>
     </File>
     <File Include="Views/Summary/_PartialCustomerData.cshtml">
-      <publishTime>06/13/2023 19:13:32</publishTime>
+      <publishTime>01/16/2024 13:19:56</publishTime>
     </File>
     <File Include="Views/Summary/_PartialTableData.cshtml">
-      <publishTime>06/21/2023 11:14:53</publishTime>
+      <publishTime>01/16/2024 13:14:57</publishTime>
     </File>
     <File Include="Views/UserMaster/Index.cshtml">
       <publishTime>03/16/2023 16:06:40</publishTime>
     </File>
     <File Include="Views/UserMasters/Create.cshtml">
-      <publishTime>05/13/2023 11:35:31</publishTime>
+      <publishTime>07/22/2023 12:55:41</publishTime>
     </File>
     <File Include="Views/UserMasters/Delete.cshtml">
-      <publishTime>03/16/2023 16:06:40</publishTime>
+      <publishTime>07/22/2023 12:55:37</publishTime>
     </File>
     <File Include="Views/UserMasters/Details.cshtml">
       <publishTime>03/16/2023 16:06:40</publishTime>
     </File>
     <File Include="Views/UserMasters/Edit.cshtml">
-      <publishTime>03/16/2023 16:06:40</publishTime>
+      <publishTime>07/22/2023 12:55:34</publishTime>
     </File>
     <File Include="Views/UserMasters/Index.cshtml">
       <publishTime>03/16/2023 16:09:45</publishTime>
@@ -774,7 +768,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/15/2023 17:03:37</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/12/2023 17:25:59</publishTime>
+      <publishTime>02/21/2024 13:20:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

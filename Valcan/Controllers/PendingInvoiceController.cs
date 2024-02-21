@@ -24,6 +24,11 @@ namespace Valcan.Controllers
                     return RedirectToAction("Login", "Home");
                 }
                 var uid = (int)Session["UserID"];
+                var lastUpload = db.UploadExcel_Audit.OrderByDescending(x => x.Id).FirstOrDefault();
+                if (lastUpload != null)
+                {
+                    ViewBag.lastUpload = lastUpload.UploadDate;
+                }
                 //var keymagrlst = db.UserInKeyManagerMasters.Where(x => x.UserID == (int)Session["UserID"]).Select(x => x.KeyManagerID).ToList();
 
                 //var offerlst = db.OfferMasters.Where(x => x.Key_Managr.Contains()).ToListAsync();
@@ -47,6 +52,9 @@ namespace Valcan.Controllers
                                 om.Amount_in_LC,
                                 om.Day1,
                                 um.UserID,
+                                om.Debit_Credit_Indicator,
+                                om.Payment_reference,
+                                om.Sales_Doc,
                                 um.KeyManagerMaster.KeyManager_Name,
                                 //om.Offer_Value_INR,
                                 //om.Order_Expected,
@@ -68,7 +76,14 @@ namespace Valcan.Controllers
                     order.Amount = item.Amount;
                     order.Amount_in_LC = item.Amount_in_LC;
                     order.Day1 = item.Day1;
+                    order.Sales_Doc = item.Sales_Doc;
+                    order.Payment_reference = item.Payment_reference;
 
+                    if (item.Debit_Credit_Indicator == "Credit")
+                    {
+                        var val = Convert.ToDecimal(item.Amount_in_LC) * -1;
+                        order.Amount_in_LC = val.ToString();
+                    }
                     orderlst.Add(order);
                 }
                 //var s = orderlst.ToList().Sum(x=>x.Amount_in_LC)

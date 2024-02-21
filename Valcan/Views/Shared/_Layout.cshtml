@@ -121,57 +121,59 @@
                                     <span>Upload Excel</span>
                                 </a>
                             </li>
-                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
-                                <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
-                                    <img src="~/Template/admin/images/order-list.png" />
-                                    <span>Offer List</span>
-                                </a>
-                            </li>
-
-                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
-                                <a href="@Url.Action("Index", "Order")" class="side-nav-link">
-                                    <img src="~/Template/admin/images/order-list.png" />
-                                    <span>Order List</span>
-                                </a>
-                            </li>
                             <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Summary" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
                                 <a href="@Url.Action("Index", "Summary")" class="side-nav-link">
                                     <img src="~/Template/admin/images/order-list.png" />
                                     <span>Summary</span>
                                 </a>
                             </li>
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Pending Offers</span>
+                                </a>
+                            </li>
+
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "Order")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Pending Orders</span>
+                                </a>
+                            </li>
+
                             <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "PendingInvoice" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
                                 <a href="@Url.Action("Index", "PendingInvoice")" class="side-nav-link">
                                     <img src="~/Template/admin/images/order-list.png" />
-                                    <span>Pending Invoice</span>
+                                    <span>Pending payment</span>
                                 </a>
                             </li>
                         }
                         else
                         {
-                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
-                                <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
-                                    <img src="~/Template/admin/images/order-list.png" />
-                                    <span>Offer List</span>
-                                </a>
-                            </li>
-
-                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
-                                <a href="@Url.Action("Index", "Order")" class="side-nav-link">
-                                    <img src="~/Template/admin/images/order-list.png" />
-                                    <span>Order List</span>
-                                </a>
-                            </li>
                             <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Summary" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
                                 <a href="@Url.Action("Index", "Summary")" class="side-nav-link">
                                     <img src="~/Template/admin/images/order-list.png" />
                                     <span>Summary</span>
                                 </a>
                             </li>
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Pending Offers</span>
+                                </a>
+                            </li>
+
+                            <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                <a href="@Url.Action("Index", "Order")" class="side-nav-link">
+                                    <img src="~/Template/admin/images/order-list.png" />
+                                    <span>Pending Orders</span>
+                                </a>
+                            </li>
+
                             <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "PendingInvoice" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
                                 <a href="@Url.Action("Index", "PendingInvoice")" class="side-nav-link">
                                     <img src="~/Template/admin/images/order-list.png" />
-                                    <span>Pending Invoice</span>
+                                    <span>Pending payment</span>
                                 </a>
                             </li>
                         }
@@ -374,30 +376,30 @@
                     </div>
                 </div>
                 @*<div class="left-filter2" style="display:none;">
-                    <div id="summaryfiltersection">
-                        <div class="filter1">
-                            <div class="name">
-                                Key account manager
+                        <div id="summaryfiltersection">
+                            <div class="filter1">
+                                <div class="name">
+                                    Key account manager
+                                </div>
+                                <div class="">
+                                    <select id="ddlSKeyManager">
+                                        <option value="0">Eq</option>
+                                        <option value="1">!Eq</option>
+                                        <option value="2">In</option>
+                                        <option value="3">!In</option>
+                                        <option value="4">Contains</option>
+                                        <option value="5">!Contains</option>
+                                    </select>
+                                </div>
+                                <div class=""><input type="text" name="" value="" id="txtSKeyManager"></div>
                             </div>
-                            <div class="">
-                                <select id="ddlSKeyManager">
-                                    <option value="0">Eq</option>
-                                    <option value="1">!Eq</option>
-                                    <option value="2">In</option>
-                                    <option value="3">!In</option>
-                                    <option value="4">Contains</option>
-                                    <option value="5">!Contains</option>
-                                </select>
-                            </div>
-                            <div class=""><input type="text" name="" value="" id="txtSKeyManager"></div>
                         </div>
-                    </div>
-                    <div class="option-menu">
-                        <div class="menu-box1" id="SummarySearch"><i class="fa fa-search" aria-hidden="true"></i></div>
-                        <div class="menu-box2" id="Summaryfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
-                        <div class="menu-box3" id="SummarySearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
-                    </div>
-                </div>*@
+                        <div class="option-menu">
+                            <div class="menu-box1" id="SummarySearch"><i class="fa fa-search" aria-hidden="true"></i></div>
+                            <div class="menu-box2" id="Summaryfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+                            <div class="menu-box3" id="SummarySearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                        </div>
+                    </div>*@
                 <div class="left-filter3" style="display:none;">
                     <div id="orderfiltersection">
                         <div class="filter1">
@@ -570,6 +572,7 @@
                                         <div class="head-title">
                                             <h1>@ViewBag.Title</h1>
                                         </div>
+                                        <div style="text-align:center;"> Data loading on:  <label id="lstloadDate">@ViewBag.lastUpload</label></div>
                                         <div class="right-side">
                                             <ul>
                                                 @if (User.Identity.IsAuthenticated)
@@ -578,25 +581,25 @@
                                                     <li>@Session["UserName"]</li>
 
                                                     @*<li>
-                                                            <div class="dropdown">
-                                                                <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="~/Template/admin/images/avatars.png" alt="profile image" class="img-fluid rounded-circle avatar" /></a>
-                                                                <ul class="dropdown-menu border-0" aria-labelledby="dropdownMenuLink">
-                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; My Profile</a></li>
-                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; Settings</a></li>
-                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-sign-in"></i> &nbsp; Logout</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>*@
+                        <div class="dropdown">
+                            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="~/Template/admin/images/avatars.png" alt="profile image" class="img-fluid rounded-circle avatar" /></a>
+                            <ul class="dropdown-menu border-0" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; My Profile</a></li>
+                                <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; Settings</a></li>
+                                <li><a class="dropdown-item" href="#!"><i class="fa fa-sign-in"></i> &nbsp; Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>*@
                                                     @*<li>
-                                                            <div class="dropdown">
-                                                                <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-cog"></i></a>
-                                                                <ul class="dropdown-menu border-0" aria-labelledby="dropdownMenuLink">
-                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; My Profile</a></li>
-                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; Settings</a></li>
-                                                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-sign-in"></i> &nbsp; Logout</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>*@
+                        <div class="dropdown">
+                            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                            <ul class="dropdown-menu border-0" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; My Profile</a></li>
+                                <li><a class="dropdown-item" href="#!"><i class="fa fa-gear"></i> &nbsp; Settings</a></li>
+                                <li><a class="dropdown-item" href="#!"><i class="fa fa-sign-in"></i> &nbsp; Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>*@
                                                     <li>
                                                         <div class="dropdown">
 
@@ -688,57 +691,58 @@
                                             <span>Upload Excel</span>
                                         </a>
                                     </li>
-                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
-                                        <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
-                                            <img src="~/Template/admin/images/order-list.png" />
-                                            <span>Offer List</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
-                                        <a href="@Url.Action("Index", "Order")" class="side-nav-link">
-                                            <img src="~/Template/admin/images/order-list.png" />
-                                            <span>Order List</span>
-                                        </a>
-                                    </li>
                                     <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Summary" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
                                         <a href="@Url.Action("Index", "Summary")" class="side-nav-link">
                                             <img src="~/Template/admin/images/order-list.png" />
                                             <span>Summary</span>
                                         </a>
                                     </li>
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Pending Offers</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "Order")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Pending Orders</span>
+                                        </a>
+                                    </li>
+
                                     <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "PendingInvoice" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
                                         <a href="@Url.Action("Index", "PendingInvoice")" class="side-nav-link">
                                             <img src="~/Template/admin/images/order-list.png" />
-                                            <span>Pending Invoice</span>
+                                            <span>Pending payment</span>
                                         </a>
                                     </li>
                                 }
                                 else
                                 {
-                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
-                                        <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
-                                            <img src="~/Template/admin/images/order-list.png" />
-                                            <span>Offer List</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
-                                        <a href="@Url.Action("Index", "Order")" class="side-nav-link">
-                                            <img src="~/Template/admin/images/order-list.png" />
-                                            <span>Order List</span>
-                                        </a>
-                                    </li>
                                     <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Summary" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
                                         <a href="@Url.Action("Index", "Summary")" class="side-nav-link">
                                             <img src="~/Template/admin/images/order-list.png" />
                                             <span>Summary</span>
                                         </a>
                                     </li>
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Offer" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "Offer")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Pending Offers</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
+                                        <a href="@Url.Action("Index", "Order")" class="side-nav-link">
+                                            <img src="~/Template/admin/images/order-list.png" />
+                                            <span>Pending Orders</span>
+                                        </a>
+                                    </li>
                                     <li class="side-nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "PendingInvoice" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active menuitem-active" : "")">
                                         <a href="@Url.Action("Index", "PendingInvoice")" class="side-nav-link">
                                             <img src="~/Template/admin/images/order-list.png" />
-                                            <span>Pending Invoice</span>
+                                            <span>Pending payment</span>
                                         </a>
                                     </li>
                                 }
@@ -941,62 +945,62 @@
                             </div>
                         </div>
                         @*<div class="left-filter2" style="display:none;">
-                            <div id="summaryfiltersection">
-                                <div class="filter1">
-                                    <div class="name">
-                                        Customer Name
+                                <div id="summaryfiltersection">
+                                    <div class="filter1">
+                                        <div class="name">
+                                            Customer Name
+                                        </div>
+                                        <div class="">
+                                            <select id="ddlSCustName">
+                                                <option value="0">Eq</option>
+                                                <option value="1">!Eq</option>
+                                                <option value="2">In</option>
+                                                <option value="3">!In</option>
+                                                <option value="4">Contains</option>
+                                                <option value="5">!Contains</option>
+                                            </select>
+                                        </div>
+                                        <div class=""><input type="text" name="" value="" id="txtSCustName"></div>
                                     </div>
-                                    <div class="">
-                                        <select id="ddlSCustName">
-                                            <option value="0">Eq</option>
-                                            <option value="1">!Eq</option>
-                                            <option value="2">In</option>
-                                            <option value="3">!In</option>
-                                            <option value="4">Contains</option>
-                                            <option value="5">!Contains</option>
-                                        </select>
+                                    <div class="filter1">
+                                        <div class="name">
+                                            Customer code
+                                        </div>
+                                        <div class="">
+                                            <select id="ddlSCustCode">
+                                                <option value="0">Eq</option>
+                                                <option value="1">!Eq</option>
+                                                <option value="2">In</option>
+                                                <option value="3">!In</option>
+                                                <option value="4">Contains</option>
+                                                <option value="5">!Contains</option>
+                                            </select>
+                                        </div>
+                                        <div class=""><input type="text" name="" value="" id="txtSCustCode"></div>
                                     </div>
-                                    <div class=""><input type="text" name="" value="" id="txtSCustName"></div>
+                                    <div class="filter1">
+                                        <div class="name">
+                                            Key account manager
+                                        </div>
+                                        <div class="">
+                                            <select id="ddlSKeyManager">
+                                                <option value="0">Eq</option>
+                                                <option value="1">!Eq</option>
+                                                <option value="2">In</option>
+                                                <option value="3">!In</option>
+                                                <option value="4">Contains</option>
+                                                <option value="5">!Contains</option>
+                                            </select>
+                                        </div>
+                                        <div class=""><input type="text" name="" value="" id="txtSKeyManager"></div>
+                                    </div>
                                 </div>
-                                <div class="filter1">
-                                    <div class="name">
-                                        Customer code
-                                    </div>
-                                    <div class="">
-                                        <select id="ddlSCustCode">
-                                            <option value="0">Eq</option>
-                                            <option value="1">!Eq</option>
-                                            <option value="2">In</option>
-                                            <option value="3">!In</option>
-                                            <option value="4">Contains</option>
-                                            <option value="5">!Contains</option>
-                                        </select>
-                                    </div>
-                                    <div class=""><input type="text" name="" value="" id="txtSCustCode"></div>
+                                <div class="option-menu">
+                                    <div class="menu-box1" id="SummarySearch"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                    <div class="menu-box2" id="Summaryfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+                                    <div class="menu-box3" id="SummarySearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
                                 </div>
-                                <div class="filter1">
-                                    <div class="name">
-                                        Key account manager
-                                    </div>
-                                    <div class="">
-                                        <select id="ddlSKeyManager">
-                                            <option value="0">Eq</option>
-                                            <option value="1">!Eq</option>
-                                            <option value="2">In</option>
-                                            <option value="3">!In</option>
-                                            <option value="4">Contains</option>
-                                            <option value="5">!Contains</option>
-                                        </select>
-                                    </div>
-                                    <div class=""><input type="text" name="" value="" id="txtSKeyManager"></div>
-                                </div>
-                            </div>
-                            <div class="option-menu">
-                                <div class="menu-box1" id="SummarySearch"><i class="fa fa-search" aria-hidden="true"></i></div>
-                                <div class="menu-box2" id="Summaryfiltershow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
-                                <div class="menu-box3" id="SummarySearchClear"><i class="fa fa-undo" aria-hidden="true"></i></div>
-                            </div>
-                        </div>*@
+                            </div>*@
                         <div class="left-filter3" style="display:none;">
                             <div id="orderfiltersection">
                                 <div class="filter1">
@@ -1178,6 +1182,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js" integrity="sha512-DedNBWPF0hLGUPNbCYfj8qjlEnNE92Fqn7xd3Sscfu7ipy7Zu33unHdugqRD3c4Vj7/yLv+slqZhMls/4Oc7Zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
     @*<script src="~/Scripts/datatables-demo.js"></script>
         <script src="~/Scripts/datatables.net/DataTableJS/jquery.dataTables.min.js"></script>*@
     <script src="~/Scripts/Site.js"></script>
@@ -1207,7 +1212,7 @@
                 return true;
             }
         }
-                    /* ==== # mobile JS ==== */
+                            /* ==== # mobile JS ==== */
     </script>
     @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
     @*<script src="~/OldTemplate/js/demo/datatables-demo.js"></script>

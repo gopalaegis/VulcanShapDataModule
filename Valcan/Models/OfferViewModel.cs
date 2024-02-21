@@ -15,7 +15,7 @@ namespace Valcan.Models
         public string Sold_to_pt { get; set; }
         [Display(Name = "Customer Name")]
         public string Name_1 { get; set; }
-        [Display(Name = "Inquiry Ref.")]
+        [Display(Name = "Inquiry No.")]
         public string Purchase_order_number { get; set; }
         [Display(Name = "Offer No.")]
         public string Document { get; set; }
@@ -36,10 +36,10 @@ namespace Valcan.Models
         [Display(Name = "Qty")]
         public string ConfirmQty { get; set; }
         public string Net_value1 { get; set; }
-        [Display(Name = "Offer Net Price")]
+        [Display(Name = "Unit Price")]
         public string Net_price { get; set; }
         
-        [Display(Name = "Offer Value Doc Curr.")]
+        [Display(Name = "Total Price")]
         public string Net_Value { get; set; }
         public string Prb { get; set; }
         public Nullable<System.DateTime> Dlv_Date { get; set; }
@@ -57,9 +57,9 @@ namespace Valcan.Models
         public string Cust_Ind_C { get; set; }
         public string Cust_Ind_D { get; set; }
         public string OrdRs { get; set; }
-        [Display(Name = "Offer Value INR")]
+        [Display(Name = "Total Price in INR")]
         public string Offer_Value_INR     { get; set; }
-        [Display(Name = "Order Expected")]
+        [Display(Name = "Expected order value in INR")]
         public string Order_Expected  { get; set; }
     }
 }

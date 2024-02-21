@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="admin_vulcan2devModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="UploadExcel_Audit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UploadDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="CustomerMaster">
           <Key>
             <PropertyRef Name="Cust_Id" />
@@ -370,6 +378,7 @@
           <Parameter Name="fyend" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="admin_vulcan2devModelStoreContainer">
+          <EntitySet Name="UploadExcel_Audit" EntityType="Self.UploadExcel_Audit" Schema="admin_vulcanmarketinglive" store:Type="Tables" />
           <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KeyManagerMasters" EntityType="Self.KeyManagerMasters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OfferMaster" EntityType="Self.OfferMaster" Schema="dbo" store:Type="Tables" />
@@ -441,6 +450,7 @@
             <Parameter Name="fyStart" Mode="In" Type="DateTime" />
             <Parameter Name="fyend" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="UploadExcel_Audit" EntityType="admin_vulcan2devModel.UploadExcel_Audit" />
         </EntityContainer>
         <EntityType Name="CustomerMaster">
           <Key>
@@ -819,6 +829,14 @@
           <Property Type="String" Name="KeyManager_Name" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="keymanager_id" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="UploadExcel_Audit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1165,6 +1183,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UploadExcel_Audit">
+            <EntityTypeMapping TypeName="admin_vulcan2devModel.UploadExcel_Audit">
+              <MappingFragment StoreEntitySet="UploadExcel_Audit">
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

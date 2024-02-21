@@ -34,7 +34,11 @@ namespace Valcan.Controllers
                         select s;
 
             users = users.OrderBy(s => s.FirstName);
-
+            var lastUpload = db.UploadExcel_Audit.OrderByDescending(x => x.Id).FirstOrDefault();
+            if (lastUpload != null)
+            {
+                ViewBag.lastUpload = lastUpload.UploadDate;
+            }
             return View(users.ToPagedList(1, 10));
 
         }
@@ -472,7 +476,7 @@ namespace Valcan.Controllers
             userMaster.IsActive = false;
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }  
 
         protected override void Dispose(bool disposing)
         {

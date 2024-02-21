@@ -297,10 +297,10 @@
     <Content Include="Document\Offers.xlsx" />
     <Content Include="log4net.config" />
     <Content Include="Logs\ErrorLog.txt" />
-    <Content Include="Document\Order list.xlsx" />
     <Content Include="Document\Pending invoice.xlsx" />
     <Content Include="Document\Summary.xlsx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\buttons.colVis.min.js" />
     <Content Include="Scripts\CountryCodeJS\css\demo.css" />
     <Content Include="Scripts\CountryCodeJS\css\intlTelInput.css" />
     <Content Include="Scripts\CountryCodeJS\css\intlTelInput.min.css" />
@@ -329,6 +329,7 @@
     <Content Include="Scripts\JQueryDataTable\1.13.4\dataTables.buttons.min.js" />
     <Content Include="Scripts\JQueryDataTable\1.13.4\jquery.dataTables.min.js" />
     <Content Include="Scripts\JQueryDataTable\1.13.4\jszip.min.js" />
+    <Content Include="Scripts\JQueryDataTable\buttons.dataTables.min.css" />
     <Content Include="Scripts\JQueryDataTable\dataTables.buttons.min.js" />
     <Content Include="Scripts\JQueryDataTable\dataTables.responsive.min.js" />
     <Content Include="Scripts\JQueryDataTable\jquery.dataTables.min.css" />

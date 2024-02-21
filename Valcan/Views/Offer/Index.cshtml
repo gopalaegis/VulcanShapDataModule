@@ -32,22 +32,25 @@
 
         .large-table-fake-top-scroll-container-3 div {
             background-color: red;*/ /*Just for test, to see the 'fake' div*/
-            /*font-size: 1px;
+    /*font-size: 1px;
             line-height: 1px;
         }*/
 
-    .dataTables_scrollBody{
-        overflow-x:initial !important;
-        overflow-y:visible !important;
+    .dataTables_scrollBody {
+        overflow-x: initial !important;
+        overflow-y: visible !important;
     }
+
     .dataTables_scrollHead {
         overflow: visible !important;
     }
+
     .doubleScroll-scroll-wrapper {
         overflow-y: scroll !important;
         height: 16px !important;
         width: inherit !important;
     }
+
     .doubleScroll-scroll {
         height: 20px !important;
         width: 144% !important;
@@ -56,6 +59,7 @@
 <link href="~/Scripts/JQueryDataTable/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="~/Scripts/JQueryDataTable/responsive.dataTables.min.css" rel="stylesheet" />
 <link href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+<link href="~/Scripts/JQueryDataTable/buttons.dataTables.min.css" rel="stylesheet" />
 
 <div class="row" id="partialTableData">
     @Html.Partial("_PartialTableData", Model)
@@ -72,6 +76,7 @@
     <script src="~/Scripts/JQueryDataTable/1.13.4/buttons.html5.min.js"></script>
     @*<script src="https://cdn.jsdelivr.net/npm/jqdoublescroll@1.0.0/jquery.doubleScroll.min.js"></script>*@
     <script src="~/Scripts/jquery.doubleScroll.min.js"></script>
+    <script src="~/Scripts/buttons.colVis.min.js"></script>
 
     <script>
         var table;
@@ -105,13 +110,13 @@
                         }
                     },
                     {
-                        targets: [13],
+                        targets: [11],
                         render: function (data, type, row, meta) {
                             return parseInt(data).toLocaleString('en-US');
                         }
                     },
                     {
-                        targets: [14],
+                        targets: [12],
                         render: function (data, type, row, meta) {
                             return parseInt(data).toLocaleString('en-US');
                         }
@@ -136,7 +141,7 @@
 
                     // Total over this page
                     pageTotal = api
-                        .column(13, { search: 'applied' })
+                        .column(11, { search: 'applied' })
                         .data()
                         .reduce(function (a, b) {
                             return parseFloat(a) + parseFloat(b);
@@ -152,7 +157,7 @@
 
                     // Total over this page
                     pageTotal2 = api
-                        .column(14, { search: 'applied' })
+                        .column(12, { search: 'applied' })
                         .data()
                         .reduce(function (a, b) {
                             return parseFloat(a) + parseFloat(b);
@@ -181,7 +186,7 @@
                 x1 = x1.replace(rgx, '$1' + ',' + '$2');
             }
             return x1 + x2;
-            
+
         }
         //$(function () {
         //    debugger;

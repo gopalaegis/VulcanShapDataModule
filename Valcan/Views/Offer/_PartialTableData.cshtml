@@ -30,13 +30,13 @@
                 @Html.DisplayNameFor(model => model.Purchase_order_number)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Material)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Material_Description)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ConfirmQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Curr)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Net_price)
@@ -45,16 +45,16 @@
                 @Html.DisplayNameFor(model => model.Net_Value)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Curr)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Exch_Rate)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Offer_Value_INR)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Order_Expected)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Material)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Exch_Rate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Key_Managr)
@@ -84,13 +84,13 @@
                 @Html.DisplayFor(modelItem => item.Purchase_order_number)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Material)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Material_Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ConfirmQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curr)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Net_price)
@@ -99,21 +99,21 @@
                 @Html.DisplayFor(modelItem => item.Net_Value)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Curr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Exch_Rate)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Offer_Value_INR)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Order_Expected)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Key_Managr)
+                @Html.DisplayFor(modelItem => item.Material)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Exch_Rate)
             </td>
 
+            <td>
+                @Html.DisplayFor(modelItem => item.Key_Managr)
+            </td>
         </tr>
         }
     </tbody>
@@ -152,13 +152,13 @@
                     }
                 },
                 {
-                    targets: [13],
+                    targets: [11],
                     render: function (data, type, row, meta) {
                         return parseInt(data).toLocaleString('en-US');
                     }
                 },
                 {
-                    targets: [14],
+                    targets: [12],
                     render: function (data, type, row, meta) {
                         return parseInt(data).toLocaleString('en-US');
                     }
@@ -183,7 +183,7 @@
 
                 // Total over this page
                 pageTotal = api
-                    .column(13, { search: 'applied' })
+                    .column(11, { search: 'applied' })
                     .data()
                     .reduce(function (a, b) {
                         return parseFloat(a) + parseFloat(b);
@@ -199,7 +199,7 @@
 
                 // Total over this page
                 pageTotal2 = api
-                    .column(14, { search: 'applied' })
+                    .column(12, { search: 'applied' })
                     .data()
                     .reduce(function (a, b) {
                         return parseFloat(a) + parseFloat(b);

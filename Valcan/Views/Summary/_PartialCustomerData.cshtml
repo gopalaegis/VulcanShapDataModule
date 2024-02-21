@@ -11,13 +11,20 @@
                 Customer Code
             </th>
             <th>
-                Target 2023
+                Target  @DateTime.Now.Year
             </th>
             <th>
-                Order Intake 2023
+                Order Intake  @DateTime.Now.Year
             </th>
             <th>
-                Sales 2022-23
+                @if (DateTime.Now.Month >= 4)
+                {
+                    <span>Sales @DateTime.Now.AddYears(-1).Year - @DateTime.Now.Year </span>
+                }
+                else
+                {
+                    <span> Sales @DateTime.Now.AddYears(-2).Year - @DateTime.Now.AddYears(-1).ToString("yy") </span>
+                }
             </th>
             <th>
                 Open Orders
@@ -30,85 +37,85 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
+            <tr>
 
-            <td>
-                @Html.DisplayFor(modelitem => item.Sold_to_party)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Sold_to_pt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Annual_sales)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Incoming_orders)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Sales)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Open_orders)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.KEYMANAGER)
-            </td>
-        </tr>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Sold_to_party)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Sold_to_pt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Annual_sales)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Incoming_orders)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Sales)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Open_orders)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.KEYMANAGER)
+                </td>
+            </tr>
         }
     </tbody>
 </table>
 
 
-    <script>
+<script>
 
 
-        if (!$.fn.DataTable.isDataTable('#dataTable2')) {
-            $('#dataTable2').dataTable({
-                bSort: false,
-                dom: 'Bfplrti', //'Blfrtip',
-                sScrollX: true,
-                sScrollY: true,
-                lengthMenu: [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, 'All'],
-                ],
-                buttons: [{
-                    extend: 'excelHtml5',
-                    text: 'Export to Excel',
-                    autoFilter: true,
-                    sheetName: 'Exported data'
-                }],
-                columnDefs: [
-                    {
-                        targets: [2],
-                        render: function (data, type, row, meta) {
-                            return parseInt(data).toLocaleString('en-US');
-                        }
-                    },
-                    {
-                        targets: [3],
-                        render: function (data, type, row, meta) {
-                            return parseInt(data).toLocaleString('en-US');
-                        }
-                    },
-                    {
-                        targets: [4],
-                        render: function (data, type, row, meta) {
-                            return parseInt(data).toLocaleString('en-US');
-                        }
-                    },
-                    {
-                        targets: [5],
-                        render: function (data, type, row, meta) {
-                            return parseInt(data).toLocaleString('en-US');
-                        }
+    if (!$.fn.DataTable.isDataTable('#dataTable2')) {
+        $('#dataTable2').dataTable({
+            bSort: false,
+            dom: 'Bfplrti', //'Blfrtip',
+            sScrollX: true,
+            sScrollY: true,
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All'],
+            ],
+            buttons: [{
+                extend: 'excelHtml5',
+                text: 'Export to Excel',
+                autoFilter: true,
+                sheetName: 'Exported data'
+            }],
+            columnDefs: [
+                {
+                    targets: [2],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
                     }
-                ],
-            });
-            $('#dataTable2').DataTable().columns.adjust();
-        }
-        $('body').find('.dataTables_scroll').wrap('<div id="scroll_div"></div>');
-        $('#scroll_div').doubleScroll();
-    </script>
-  
+                },
+                {
+                    targets: [3],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                },
+                {
+                    targets: [4],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                },
+                {
+                    targets: [5],
+                    render: function (data, type, row, meta) {
+                        return parseInt(data).toLocaleString('en-US');
+                    }
+                }
+            ],
+        });
+        $('#dataTable2').DataTable().columns.adjust();
+    }
+    $('body').find('.dataTables_scroll').wrap('<div id="scroll_div"></div>');
+    $('#scroll_div').doubleScroll();
+</script>
+
 

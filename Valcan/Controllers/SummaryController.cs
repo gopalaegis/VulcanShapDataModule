@@ -22,6 +22,12 @@ namespace Valcan.Controllers
                 {
                     return RedirectToAction("Login", "Home");
                 }
+                var lastUpload = db.UploadExcel_Audit.OrderByDescending(x => x.Id).FirstOrDefault();
+                if (lastUpload != null)
+                {
+                    ViewBag.lastUpload = lastUpload.UploadDate;
+                }
+
                 var uid = (int)Session["UserID"];
                 var fystart = DateTime.Now;
                 var fyend = DateTime.Now;

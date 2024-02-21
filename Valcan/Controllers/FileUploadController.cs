@@ -21,6 +21,11 @@ namespace Valcan.Controllers
         // GET: FileUpload
         public ActionResult UploadFiles()
         {
+            var lastUpload = db.UploadExcel_Audit.OrderByDescending(x => x.Id).FirstOrDefault();
+            if (lastUpload !=null)
+            {
+                ViewBag.lastUpload = lastUpload.UploadDate;
+            }
             return View();
         }
         [HttpPost]
@@ -28,6 +33,11 @@ namespace Valcan.Controllers
         {
             try
             {
+                if (Session["UserID"] == null)
+                {
+                    return RedirectToAction("Login", "Home");
+                }
+                var uid = (int)Session["UserID"];
                 //Ensure model state is valid  
                 if (ModelState.IsValid)
                 {   //iterating through multiple file collection   
@@ -46,6 +56,7 @@ namespace Valcan.Controllers
                             Pfile.SaveAs(ServerSavePath);
                             //assigning file uploaded status to ViewBag for showing message to user.  
                             ViewBag.UploadStatus = files.Count().ToString() + " files uploaded successfully.";
+
                         }
 
                     }
@@ -53,6 +64,7 @@ namespace Valcan.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.UploadStatus = "There is some issue while uploading the file. Please contact the administrator.";
                 logger.Error(ex.Message);
             }
             return View();
@@ -61,8 +73,15 @@ namespace Valcan.Controllers
 
         public ActionResult LoadALlExcelData()
         {
+            Tuple<string, string> tuple = new Tuple<string, string>(string.Empty, string.Empty);
             try
             {
+                if (Session["UserID"] == null)
+                {
+                    return RedirectToAction("Login", "Home");
+                }
+                var uid = (int)Session["UserID"];
+
                 var directory = new DirectoryInfo(Server.MapPath("~/Document"));
                 bool result = false;
                 CommonMethod cm = new CommonMethod();
@@ -92,6 +111,11 @@ namespace Valcan.Controllers
                         result = cm.ImportExceltoDatabase(file.FullName);
                     }
                     ViewBag.UploadStatus = "All Excel uploaded successfully";
+                    UploadExcel_Audit _uploadExcel_Audit = new UploadExcel_Audit();
+                    _uploadExcel_Audit.UserId = uid;
+                    _uploadExcel_Audit.UploadDate = DateTime.Now;
+                    db.UploadExcel_Audit.Add(_uploadExcel_Audit);
+                    db.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -99,8 +123,8 @@ namespace Valcan.Controllers
                 logger.Error(ex);
                 ViewBag.UploadStatus = "Excel not uploaded successfully. please check log for more details.";
             }
-
-            return Json(ViewBag.UploadStatus, JsonRequestBehavior.AllowGet);
+            tuple = new Tuple<string, string>(ViewBag.UploadStatus, DateTime.Now.ToString());
+            return Json(tuple, JsonRequestBehavior.AllowGet);
         }
         public bool ImportExceltoDatabase(string strFilePath)
         {
@@ -162,7 +186,7 @@ namespace Valcan.Controllers
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    SqlConnection con = new SqlConnection("Data Source=72.52.128.82;Initial Catalog=admin_vulcan2dev;User ID=admin_vulcan2dev;Password=Rd~g4f6t0m2LHuchr");
+                    SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["Connectionstring"]);
                     string s = "Truncate Table customermaster";
                     con.Open();
                     SqlCommand Com = new SqlCommand(s, con);
@@ -319,7 +343,7 @@ namespace Valcan.Controllers
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    SqlConnection con = new SqlConnection("Data Source=72.52.128.82;Initial Catalog=admin_vulcan2dev;User ID=admin_vulcan2dev;Password=Rd~g4f6t0m2LHuchr");
+                    SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["Connectionstring"]);
                     string s = "Truncate Table ordermaster";
                     con.Open();
                     SqlCommand Com = new SqlCommand(s, con);
@@ -557,7 +581,7 @@ namespace Valcan.Controllers
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    SqlConnection con = new SqlConnection("Data Source=72.52.128.82;Initial Catalog=admin_vulcan2dev;User ID=admin_vulcan2dev;Password=Rd~g4f6t0m2LHuchr");
+                    SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["Connectionstring"]);
                     string s = "Truncate Table summary_master";
                     con.Open();
                     SqlCommand Com = new SqlCommand(s, con);
@@ -717,7 +741,7 @@ namespace Valcan.Controllers
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    SqlConnection con = new SqlConnection("Data Source=72.52.128.82;Initial Catalog=admin_vulcan2dev;User ID=admin_vulcan2dev;Password=Rd~g4f6t0m2LHuchr");
+                    SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["Connectionstring"]);
                     string s = "Truncate Table pending_invoice_Master";
                     con.Open();
                     SqlCommand Com = new SqlCommand(s, con);
@@ -913,7 +937,7 @@ namespace Valcan.Controllers
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    SqlConnection con = new SqlConnection("Data Source=72.52.128.82;Initial Catalog=admin_vulcan2dev;User ID=admin_vulcan2dev;Password=Rd~g4f6t0m2LHuchr");
+                    SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["Connectionstring"]);
                     string s = "Truncate Table offermaster";
                     con.Open();
                     SqlCommand Com = new SqlCommand(s, con);
